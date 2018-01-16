@@ -25,5 +25,20 @@ public class Exam {
         result = num01+num02+num03;
         System.out.println("합계 : " + result);
         System.out.println("평균 : " + result/3);
+
+        boolean resultB;
+        resultB = num01<num02;
+        System.out.println("결과 : "+ resultB);
+        resultB = num01>num02;
+        System.out.println("결과 : "+ resultB);
+        resultB = num01<=num02;
+        System.out.println("결과 : "+ resultB);
+        resultB = num01>=num02;
+        System.out.println("결과 : "+ resultB);
+        resultB = num01==num02;
+        System.out.println("결과 : "+ resultB);
+        resultB = num01!=num02;
+        System.out.println("결과 : "+ resultB);
+
     }
 }
