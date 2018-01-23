@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Exam {
     public static void main(String[] args){
         /*int num1;
@@ -103,16 +105,60 @@ public class Exam {
 //            j=n+j;
 //        }
 //        System.out.println(j);
-        int n,m;
-        m=2;
-        n=1;
-        while(m <= 9) {
-            while (n <= 12) {
-                System.out.println(m+"*" + n + "=" + m * n);
-                n++;
-            }
-            n=1;
-            m=m+1;
+//        int n,m;
+//        m=2;
+//        n=1;
+//        while(m <= 9) {
+//            while (n <= 12) {
+//                System.out.println(m+"*" + n + "=" + m * n);
+//                n++;
+//            }
+//            n=1;
+//            m=m+1;
+//        }
+//        Scanner kb= new Scanner(System.in); //키보드 입력 기능 활성화
+//
+//        String num = kb.nextLine(); //실제 입력을 받는 명령어
+//        System.out.println(num); //String 문자 열
+
+//        Scanner kb= new Scanner(System.in);
+//        System.out.print("당신의 이름은?");
+//        String name = kb.nextLine();
+//        System.out.println("안녕하세요 "+name+"님");
+//        System.out.println("당신은 스파게티를 좋아하는게 맞나요?");
+//        boolean isTrue = kb.nextBoolean();
+//        if(isTrue == true){
+//            System.out. println("오~ 좋아하는군요!");
+//        }
+//        else{
+//            System.out. println("이런 아니었군요.");
+//        }
+//        System.out. println("당신과 동생의 키는 어떻게 되나요?");
+//        double num1 = kb.nextDouble();
+//        double num2 = kb.nextDouble();
+//        double diff = num1-num2;
+//        if(diff>0){
+//            System.out. println("당신이 "+diff+"만큼 크군요");
+//        }
+//        else if(diff==0){
+//            System.out. println("당신과 동생의 키가 같군요.");
+//        }
+//        else{
+//            System.out. println("당신이"+(-diff)+"만큼 작군요!");
+//        }
+//        int num1=0;
+//        do{
+//            System.out.println(num1);
+//            num1++;
+//        }while(num1<0);
+//
+        Scanner kb = new Scanner(System.in);
+        int a= kb.nextInt();
+        int b;
+        int res=0;
+        for(b=1;b<=10;b++){
+            res = a*b;
+            System.out.print(res+ " ");
         }
 
     }
