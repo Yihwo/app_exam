@@ -155,10 +155,12 @@ public class Exam {
         Scanner kb = new Scanner(System.in);
         int a= kb.nextInt();
         int b;
-        int res=0;
-        for(b=1;b<=10;b++){
-            res = a*b;
-            System.out.print(res+ " ");
+        for(b=1;b<=100;b++){
+            if(b%11==0 && b%5==0){
+                continue;
+            }
+            System.out.println(b);
+
         }
 
     }
