@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 public class Exam {
     public static void main(String[] args){
         /*int num1;
@@ -152,16 +150,48 @@ public class Exam {
 //            num1++;
 //        }while(num1<0);
 //
-        Scanner kb = new Scanner(System.in);
-        int a= kb.nextInt();
-        int b;
-        for(b=1;b<=100;b++){
-            if(b%11==0 && b%5==0){
-                continue;
-            }
-            System.out.println(b);
+//        int b;
+//        for(b=1;b<=100;b++){
+//            if(b%11==0 && b%5==0){
+//                continue;
+//            }
+//            System.out.println(b);
+//
+//        }
+//        System.out.println("프로그램의 시작");
+//        hiEveryone(12,12.5);
+//        hiEveryone(13,inner);
+//        System.out.println("프로그램의 끝");
 
+
+
+        boolean scope= true;
+        if(scope == false){
+            int num=2;
+            System.out.println(num);
+        }
+        else{
+            int num = 3;
+            System.out.println(num);
         }
 
     }
+
+
+
+//    public static void hiEveryone(int age,double myHeight){
+//        System.out.println("좋은 아침입니다.");
+//        System.out.println("제 나이는 "+age+"세 입니다.");
+//        System.out.println("제 키는 "+myHeight+"세 입니다.");
+//    }
+    public static double divide(int a, int b){
+        if(b==0){
+            System.out.println("0으로는 나눌 수 없습니다.");
+            return -1;
+        }
+        return a/b;
+    }
 }
+
+//        Scanner kb = new Scanner(System.in);
+//        double inner = kb.nextDouble();
