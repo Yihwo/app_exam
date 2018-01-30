@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Exam {
     public static void main(String[] args){
         /*int num1;
@@ -163,16 +165,50 @@ public class Exam {
 //        hiEveryone(13,inner);
 //        System.out.println("프로그램의 끝");
 
+        System.out.println("계산기");
+        Scanner key = new Scanner(System.in);
+        double a ,b;
+        String carcul;
 
+        System.out.println("연산할 첫번째 수를 입력해 주세요.");
+        a = key.nextDouble();
 
-        boolean scope= true;
-        if(scope == false){
-            int num=2;
-            System.out.println(num);
-        }
-        else{
-            int num = 3;
-            System.out.println(num);
+        //개행문자 제거를 위한 flush 처리
+        key.nextLine();
+        System.out.println("연산을 선택해 주세요");
+        System.out.println("a : 덧셈");
+        System.out.println("b : 뺄셈");
+        System.out.println("c : 곱셈");
+        System.out.println("d : 나눗셈");
+        System.out.println("f : 나눗셈");
+
+        carcul = key.nextLine();
+
+        System.out.println("연산할 두번째 수를 입력해 주세요.");
+        b = key.nextDouble();
+
+        switch (carcul){
+            case "a":
+                System.out.println("두 수의 덧셈은 "+addNum(a,b)+"입니다.");
+                break;
+            case "b":
+                System.out.println("두 수의 뺄셈는 "+minNum(a,b)+"입니다.");
+                break;
+            case "c":
+                System.out.println("두 수의 곱셈은 "+mulNum(a,b)+"입니다.");
+                break;
+            case "d":
+                if(divNum(a,b)==0){
+                    break;
+                }
+                System.out.println("두 수의 나눗셈은 "+divNum(a,b)+"입니다.");
+                break;
+            case "f":
+                absoluteNum(a,b);
+                break;
+            default:
+                System.out.println("잘못 입력 했습니다.");
+                break;
         }
 
     }
@@ -184,12 +220,44 @@ public class Exam {
 //        System.out.println("제 나이는 "+age+"세 입니다.");
 //        System.out.println("제 키는 "+myHeight+"세 입니다.");
 //    }
-    public static double divide(int a, int b){
+    public static double addNum(double a, double b){
+        double result=a+b;
+        return result;
+
+    }
+    public static double minNum(double a, double b){
+        double result= a-b;
+        return result;
+
+    }
+    public static double mulNum(double a, double b){
+        double result=a*b;
+        return result;
+
+    }
+    public static double divNum(double a, double b){
         if(b==0){
             System.out.println("0으로는 나눌 수 없습니다.");
-            return -1;
+            return 0;
         }
-        return a/b;
+        double result=a/b;
+        return result;
+
+    }
+    public static void absoluteNum(double a,double b){
+        if(a<0){
+            if(b<0){
+                a = -a;
+                b = -b;
+            }
+            else
+                a=-a;
+        }
+        else{
+            if(b<0)
+                b = -b;
+        }
+        System.out.println("두 수의 절댓값은 "+a+","+b+"입니다.");
     }
 }
 
