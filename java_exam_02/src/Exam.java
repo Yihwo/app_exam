@@ -7,7 +7,7 @@ public class Exam {
 //        System.out.println("종료를 원하면 10000을 입력해 주세요.");
 //        System.out.println("총 합을 구할 수를 입력하세요.");
 //        int a;
-////        double a;
+//        double a;
 //        Scanner key = new Scanner(System.in);
 //        a = key.nextInt();
 //        while(1000<a){
@@ -21,7 +21,18 @@ public class Exam {
 //        System.out.println(a+"까지의 합은 " + addAll(a)+"입니다.");
 ////        a = key.nextDouble();
 ////        System.out.println("원의 넓이는 : "+circle(a)+"입니다.");
-
+//        int num=1;
+//        while(num<100){
+//            if(num % 5 != 0 || num % 7 != 0){
+//                num++;
+//                continue;
+//            }
+//
+//            System.out.println(num);
+//            num++;
+        int change;
+        Vender myVender = new Vender();
+        myVender.runVender();
     }
 
 
@@ -48,13 +59,13 @@ public class Exam {
 //        return result;
 //    }
 }
-class FruitSeller{
-    int numOfApple = 20;
-    int myMoney = 0;
-    public int SaleApple(int money){
-        int num = money/1000;
-        numOfApple-=num;
-        myMoney+=money;
-        return num;
-    }
-}
+//class FruitSeller{
+//    int numOfApple = 20;
+//    int myMoney = 0;
+//    public int SaleApple(int money){
+//        int num = money/1000;
+//        numOfApple-=num;
+//        myMoney+=money;
+//        return num;
+//    }
+//}
