@@ -30,9 +30,18 @@ public class Exam {
 //
 //            System.out.println(num);
 //            num++;
-        int change;
-        Vender myVender = new Vender();
-        myVender.runVender();
+//        int change;
+//        Vender myVender = new Vender();
+//        myVender.runVender();
+
+
+        Number myNum = new Number();
+        InstCnt cnt1 = new InstCnt();
+        InstCnt cnt2 = new InstCnt();
+        InstCnt cnt3 = new InstCnt();
+
+
+
     }
 
 
