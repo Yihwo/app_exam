@@ -11,7 +11,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,13 +26,17 @@ public class MainActivity extends AppCompatActivity {
         Button btn_test = (Button)findViewById(R.id.button1);//레이아웃의 버튼이 기능할 수 있도록 코드의 버튼 생성
         Button btn_test02 = (Button)findViewById(R.id.button2);
         ImageView image01 = (ImageView)findViewById(R.id.image1);
+        TextView txt01 = (TextView)findViewById(R.id.result);
         //리스너의 객체 생성
-        MyListener01 myListener = new MyListener01();
+        MyListener01 myListener01 = new MyListener01();
         MyListener02 myListener02 = new MyListener02();
+        MyListener03 myListener03 = new MyListener03();
+        MyListener04 myListener04 = new MyListener04();
         //컴포넌트 객체에 리스너 등록
-        btn_test.setOnClickListener(myListener);
+        btn_test.setOnClickListener(myListener01);
         btn_test02.setOnClickListener(myListener02);
-        image01.setOnClickListener(myListener);
+        image01.setOnClickListener(myListener03);
+        txt01.setOnClickListener(myListener04);
     }
 
     //버튼이 기능할 리스너 만듦
@@ -45,6 +52,20 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View view) {
             //텍스트 출력
             Toast.makeText(MainActivity.this,"버튼2를 클릭하였습니다.",Toast.LENGTH_SHORT).show();
+        }
+    }
+    class MyListener03 implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            //텍스트 출력
+            Toast.makeText(MainActivity.this,"이미지뷰를 클릭하였습니다.",Toast.LENGTH_SHORT).show();
+        }
+    }
+    class MyListener04 implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            //텍스트 출력
+            Toast.makeText(MainActivity.this,"텍스트뷰를 클릭하였습니다.",Toast.LENGTH_SHORT).show();
         }
     }
 
