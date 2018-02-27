@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
-    Button btn_second,btn_first;
+    Button btn_second,btn_first,btn_bp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -16,11 +16,13 @@ public class MainActivity extends AppCompatActivity {
 
         btn_first = (Button)findViewById(R.id.btn_first);
         btn_second = (Button)findViewById(R.id.btn_second);
+        btn_bp = (Button)findViewById(R.id.bp_btn);
 
         MyListener01 myListener01 = new MyListener01();
 
         btn_first.setOnClickListener(myListener01);
         btn_second.setOnClickListener(myListener01);
+        btn_bp.setOnClickListener(myListener01);
     }
     class MyListener01 implements View.OnClickListener{
         @Override
@@ -28,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
             Intent intent_first = new Intent(getApplicationContext(),FirstActivity.class);//다른 페이지와 연결하기 위해 필요
             //getApplicationContext() = 현재 자신의 액티비티
             Intent intent_second = new Intent(getApplicationContext(),SecondActivity.class);
+            Intent intent_bp = new Intent(getApplicationContext(),VideoActivity.class);
 
             switch(view.getId()){
                 case R.id.btn_first:
@@ -35,6 +38,9 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case R.id.btn_second:
                     startActivity(intent_second);//intent 활성화
+                    break;
+                case R.id.bp_btn:
+                    startActivity(intent_bp);//intent 활성화
                     break;
             }
         }
