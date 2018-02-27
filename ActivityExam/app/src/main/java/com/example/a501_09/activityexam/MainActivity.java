@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             Intent intent_first = new Intent(getApplicationContext(),FirstActivity.class);//다른 페이지와 연결하기 위해 필요
-            //getApplicationContext() = 메인 액티비티
+            //getApplicationContext() = 현재 자신의 액티비티
             Intent intent_second = new Intent(getApplicationContext(),SecondActivity.class);
 
             switch(view.getId()){
