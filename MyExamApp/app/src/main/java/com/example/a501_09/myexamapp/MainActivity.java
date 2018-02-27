@@ -105,6 +105,37 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    //비슷한 류의 리스너 들을 하나로 출력
+    class MyListener05 implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            //텍스트 출력
+            String input01 = num01.getText().toString();
+            String input02 = num02.getText().toString();
+
+            switch(view.getId()){
+                case R.id.add:
+                    int result = Integer.parseInt(input01)+Integer.parseInt(input02);
+                    txt_result.setText(Integer.toString(result));
+                    break;
+                case R.id.min:
+                    result = Integer.parseInt(input01)-Integer.parseInt(input02);
+                    txt_result.setText(Integer.toString(result));
+                    break;
+                case R.id.mul:
+                    result = Integer.parseInt(input01)*Integer.parseInt(input02);
+                    txt_result.setText(Integer.toString(result));
+                    break;
+                case R.id.div:
+                    double result1 = Double.parseDouble(input01)/Double.parseDouble(input02);
+                    txt_result.setText(Double.toString(result1));
+                    break;
+            }
+            double result = Double.parseDouble(input01)/Double.parseDouble(input02);
+            txt_result.setText(Double.toString(result));
+        }
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
