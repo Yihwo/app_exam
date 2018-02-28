@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="greatman_explain">
+        <item>조선 시대의 장군</item>
+        <item>고구려 시대의 왕</item>
+        <item>조선시대의 화가이자 문인</item>
+        <item>조선시대의 4대 왕</item>
+    </string-array>
+</resources>

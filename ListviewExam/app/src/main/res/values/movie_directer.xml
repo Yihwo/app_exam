@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="movie_directer">
+        <item>토미 위르콜라</item>
+        <item>홍창표</item>
+        <item>라이언 쿠글러</item>
+        <item>프란시스 로렌스</item>
+    </string-array>
+</resources>

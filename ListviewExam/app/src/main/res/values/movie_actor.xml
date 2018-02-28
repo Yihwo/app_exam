@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="movie_actor">
+        <item>누미 라파스 ,  윌렘 데포 ,  글렌 클로즈</item>
+        <item>심은경 ,  이승기</item>
+        <item>채드윅 보스만 ,  마이클 B. 조던 ,  루피타 뇽 ,  다나이 구리라</item>
+        <item>제니퍼 로렌스 ,  조엘 에저튼 ,  마티아스 쇼에나에츠 ,  샬롯 램플링 ,  제레미 아이언스 ,  메리 루이스 파커</item>
+    </string-array>
+</resources>

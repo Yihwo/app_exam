@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="great_man">
+        <item>이순신</item>
+        <item>광개토 대왕</item>
+        <item>신사임당</item>
+        <item>세종대왕</item>
+    </string-array>
+</resources>

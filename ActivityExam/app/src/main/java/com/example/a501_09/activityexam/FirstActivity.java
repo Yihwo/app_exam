@@ -26,9 +26,22 @@ public class FirstActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first);
 
+        //3. 화면 전환 후 이전 엑티비티에서 보낸 인텐트를 수신
+        Intent intent = getIntent();
+        //4. 인텐트에서 데이터를 읽음
+        String text = intent.getStringExtra("MainToFirstButton");
+        String text1 = intent.getStringExtra("MainToFirstButton1");
+        int temp = intent.getIntExtra("MainToFirstNum",-1);
+        //데이터 수신 여부 확인
+        if(text!=null){
+            Toast.makeText(FirstActivity.this, text1, Toast.LENGTH_LONG).show();
+            //Integer.toString(temp)//숫자 출력시에 사용
+        }
+
+
         home_btn = (Button)findViewById(R.id.btn_Home);
-        MyListener homeListener = new MyListener();
-        home_btn.setOnClickListener(homeListener);
+        MyListener myListener = new MyListener();
+        home_btn.setOnClickListener(myListener);
 
 
         ratingBar = (RatingBar)findViewById(R.id.ratingBar_01);
@@ -44,8 +57,15 @@ public class FirstActivity extends AppCompatActivity {
         final MediaController mediaController = new MediaController(this);
         video_first.setMediaController(mediaController);//비디오 뷰에 컨트롤러 생성
     }
+
     class MyListener implements View.OnClickListener{
         public void onClick(View view){
+            //5. 데이터를 수신 후에 처리결과를 이전 액티비티로 전달하기 위한 인텐트 생성하고 처리, 데이터 추가
+            Intent intent = new Intent();
+            intent.putExtra("FirstToMainButton", "처음에서 메인으로 전달하는 데이터");
+            intent.putExtra("FirstToMainButton1", "처음에서 메인으로 전달하는 데이터1");
+            setResult(RESULT_OK, intent);//응답을 해주는 함수(잘 받았음을 의미)
+
             finish();//현재 보이는 화면 지우기 = 바로 직전 화면으로 이동하는 효과
         }
     }
