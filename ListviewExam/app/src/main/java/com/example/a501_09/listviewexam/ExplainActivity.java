@@ -17,12 +17,12 @@ import android.widget.Toast;
 public class ExplainActivity extends AppCompatActivity {
     String[] movie_title;
     String[] movie_type;
-    String[] movie_directer;
+    String[] movie_director;
     String[] movie_actor;
 
     TextView mv_title;
     TextView mv_type;
-    TextView mv_directer;
+    TextView mv_director;
     TextView mv_actor;
 
     ImageButton back_btn;
@@ -38,12 +38,12 @@ public class ExplainActivity extends AppCompatActivity {
 
         movie_title = getResources().getStringArray(R.array.movie_title);
         movie_type = getResources().getStringArray(R.array.movie_type);
-        movie_directer = getResources().getStringArray(R.array.movie_directer);
+        movie_director = getResources().getStringArray(R.array.movie_director);
         movie_actor = getResources().getStringArray(R.array.movie_actor);
 
         mv_title = (TextView)findViewById(R.id.movie_title);
         mv_type = (TextView)findViewById(R.id.movie_type);
-        mv_directer = (TextView)findViewById(R.id.movie_directer);
+        mv_director = (TextView)findViewById(R.id.movie_director);
         mv_actor = (TextView)findViewById(R.id.movie_actor);
 
 
@@ -59,7 +59,7 @@ public class ExplainActivity extends AppCompatActivity {
 
         mv_title.setText(movie_title[movie_index]);
         mv_type.setText(movie_type[movie_index]);
-        mv_directer.setText(movie_directer[movie_index]);
+        mv_director.setText(movie_director[movie_index]);
         mv_actor.setText(movie_actor[movie_index]);
 
     }
