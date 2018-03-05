@@ -17,6 +17,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ExplainActivity"></activity>
+        <activity android:name=".ReservationActivity"></activity>
     </application>
 
 </manifest>

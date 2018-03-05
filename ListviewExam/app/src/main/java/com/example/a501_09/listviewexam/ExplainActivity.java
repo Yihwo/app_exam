@@ -34,6 +34,7 @@ public class ExplainActivity extends AppCompatActivity {
     ImageButton back_btn;
     RatingBar ratingBar;
     ImageView mv_image;
+    Button reserve_btn;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,6 +44,10 @@ public class ExplainActivity extends AppCompatActivity {
         back_btn = (ImageButton)findViewById(R.id.back_btn);
         BackButtonListener backButtonListener = new BackButtonListener();
         back_btn.setOnClickListener(backButtonListener);
+
+        reserve_btn = (Button)findViewById(R.id.reservation_btn);
+        ReserveButtonListener reserveButtonListener = new ReserveButtonListener();
+        reserve_btn.setOnClickListener(reserveButtonListener);
 
         movie_title = getResources().getStringArray(R.array.movie_title);
         movie_type = getResources().getStringArray(R.array.movie_type);
@@ -83,8 +88,18 @@ public class ExplainActivity extends AppCompatActivity {
 
         }
     }
-    class BackButtonListener implements View.OnClickListener{
 
+    class ReserveButtonListener implements  View.OnClickListener{
+        @Override
+        public void onClick(View view) {
+            Intent intent;
+            intent= new Intent(ExplainActivity.this,ReservationActivity.class);
+
+            //인텐트를 넘겨주는 함수
+            startActivityForResult(intent,1);//requestCode는 순서를 확인하기 위한 장치
+        }
+    }
+    class BackButtonListener implements View.OnClickListener{
         @Override
         public void onClick(View view) {
             finish();
@@ -96,6 +111,5 @@ public class ExplainActivity extends AppCompatActivity {
             Toast.makeText(ExplainActivity.this,Double.toString(v),Toast.LENGTH_LONG).show();
         }
     }
-
 
 }
