@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -20,22 +21,47 @@ import java.util.GregorianCalendar;
 
 public class ReservationActivity extends AppCompatActivity {
 
+    String[] movie_title;
+    String[] movie_type;
+    String[] movie_director;
+    String[] movie_actor;
+
     Button time_btn,date_btn;
     TimeSetListener timeSetListener;
     DateSetListener dateSetListener;
     GregorianCalendar calendar;
     int year, month,day,hour,minute;
+    int movie_index;
+    TextView mv_title,mv_dir, mv_actor, mv_type,mv_time,mv_date;
+    int mv_hour,mv_min,mv_year,mv_month,mv_day;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reservation);
+
+        mv_title = (TextView)findViewById(R.id.movie_title);
+        mv_dir = (TextView)findViewById(R.id.movie_dir);
+        mv_actor = (TextView)findViewById(R.id.movie_actor);
+        mv_type = (TextView)findViewById(R.id.movie_type);
+        mv_time = (TextView)findViewById(R.id.movie_Time);
+        mv_date = (TextView)findViewById(R.id.movie_Date);
+
+        movie_title = getResources().getStringArray(R.array.movie_title);
+        movie_type = getResources().getStringArray(R.array.movie_type);
+        movie_director = getResources().getStringArray(R.array.movie_director);
+        movie_actor = getResources().getStringArray(R.array.movie_actor);
+
         time_btn = (Button)findViewById(R.id.time_btn);
         date_btn = (Button)findViewById(R.id.date_btn);
 
         TimeDateButtonListener timeDateButtonListener = new TimeDateButtonListener();
         time_btn.setOnClickListener(timeDateButtonListener);
         date_btn.setOnClickListener(timeDateButtonListener);
+
+        timeSetListener = new TimeSetListener();
+        dateSetListener = new DateSetListener();
+
         calendar = new GregorianCalendar();
         year = calendar.get(calendar.YEAR);
         month = calendar.get(calendar.MONTH);
@@ -43,8 +69,18 @@ public class ReservationActivity extends AppCompatActivity {
         hour = calendar.get(calendar.HOUR_OF_DAY);
         minute = calendar.get(calendar.MINUTE);
 
-        Intent intent = getIntent();
+        mv_time.setText(hour+":"+minute);
+        mv_date.setText(year+"/"+month+"/"+day);
 
+        Intent intent = getIntent();
+        movie_index = intent.getIntExtra("Movie_Index",-1);
+        if(movie_index!=-1){
+            Toast.makeText(ReservationActivity.this,Integer.toString(movie_index),Toast.LENGTH_SHORT).show();
+            mv_title.setText(movie_title[movie_index]);
+            mv_type.setText(movie_type[movie_index]);
+            mv_dir.setText(movie_director[movie_index]);
+            mv_actor.setText(movie_actor[movie_index]);
+        }
     }
     class TimeDateButtonListener implements View.OnClickListener{
 
@@ -64,12 +100,17 @@ public class ReservationActivity extends AppCompatActivity {
         @Override
         public void onTimeSet(TimePicker timePicker, int i, int i1) {
             Toast.makeText(ReservationActivity.this,i+":"+i1,Toast.LENGTH_SHORT).show();
+            if(i1<10) {
+                mv_time.setText(i + ":" + "0" + i1);
+            }else
+                mv_time.setText(i + ":" + i1);
         }
     }
     class DateSetListener implements DatePickerDialog.OnDateSetListener{
         @Override
         public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
             Toast.makeText(ReservationActivity.this,i+"/"+(i1+1)+"/"+i2,Toast.LENGTH_SHORT).show();
+            mv_date.setText(i+"/"+(i1+1)+"/"+i2);
         }
     }
 }

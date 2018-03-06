@@ -36,6 +36,8 @@ public class ExplainActivity extends AppCompatActivity {
     ImageView mv_image;
     Button reserve_btn;
 
+    int movie_index;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,7 +75,7 @@ public class ExplainActivity extends AppCompatActivity {
         //3. 화면 전환 후 이전 엑티비티에서 보낸 인텐트를 수신
         Intent intent = getIntent();
         //4. 인텐트에서 데이터를 읽음
-        int movie_index = intent.getIntExtra("Movie_Index",-1);
+        movie_index = intent.getIntExtra("Movie_Index",-1);
         //데이터 수신 여부 확인
         if(movie_index != -1){
             Toast.makeText(ExplainActivity.this, Integer.toString(movie_index), Toast.LENGTH_LONG).show();
@@ -82,6 +84,7 @@ public class ExplainActivity extends AppCompatActivity {
             mv_title.setText(movie_title[movie_index]);
             mv_type.setText(movie_type[movie_index]);
             mv_director.setText(movie_director[movie_index]);
+            mv_actor.setText(movie_actor[movie_index]);
 
             mv_image.setImageResource(movie_img.getResourceId(movie_index,-1)); // 이미지 뷰에 이미지를 설정
 
@@ -94,9 +97,9 @@ public class ExplainActivity extends AppCompatActivity {
         public void onClick(View view) {
             Intent intent;
             intent= new Intent(ExplainActivity.this,ReservationActivity.class);
-
+            intent.putExtra("Movie_Index",movie_index);
             //인텐트를 넘겨주는 함수
-            startActivityForResult(intent,1);//requestCode는 순서를 확인하기 위한 장치
+            startActivity(intent);//requestCode는 순서를 확인하기 위한 장치
         }
     }
     class BackButtonListener implements View.OnClickListener{
