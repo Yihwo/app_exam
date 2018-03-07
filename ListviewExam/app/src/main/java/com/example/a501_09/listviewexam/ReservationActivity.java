@@ -3,12 +3,14 @@ package com.example.a501_09.listviewexam;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -21,19 +23,23 @@ import java.util.GregorianCalendar;
 
 public class ReservationActivity extends AppCompatActivity {
 
+
+
     String[] movie_title;
     String[] movie_type;
     String[] movie_director;
     String[] movie_actor;
 
-    Button time_btn,date_btn;
+    Button time_btn,date_btn,refersh_btn;
     TimeSetListener timeSetListener;
     DateSetListener dateSetListener;
     GregorianCalendar calendar;
     int year, month,day,hour,minute;
     int movie_index;
-    TextView mv_title,mv_dir, mv_actor, mv_type,mv_time,mv_date;
+    TextView mv_title,mv_dir, mv_actor, mv_type,mv_time,mv_date, txt_Seekbar;
     int mv_hour,mv_min,mv_year,mv_month,mv_day;
+
+    SeekBar seekBar_Reserve;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,6 +60,7 @@ public class ReservationActivity extends AppCompatActivity {
 
         time_btn = (Button)findViewById(R.id.time_btn);
         date_btn = (Button)findViewById(R.id.date_btn);
+        refersh_btn = (Button)findViewById(R.id.refresh);
 
         TimeDateButtonListener timeDateButtonListener = new TimeDateButtonListener();
         time_btn.setOnClickListener(timeDateButtonListener);
@@ -69,8 +76,19 @@ public class ReservationActivity extends AppCompatActivity {
         hour = calendar.get(calendar.HOUR_OF_DAY);
         minute = calendar.get(calendar.MINUTE);
 
-        mv_time.setText(hour+":"+minute);
+        if(minute<10) {
+            mv_time.setText(hour + ":" + "0" + minute);
+        }else
+            mv_time.setText(hour + ":" + minute);
         mv_date.setText(year+"/"+month+"/"+day);
+
+        seekBar_Reserve = (SeekBar)findViewById(R.id.seekBar_Reserve);
+        txt_Seekbar = (TextView)findViewById(R.id.txt_Seekbar);
+
+        RefreshButtonListener refreshButtonListener = new RefreshButtonListener();
+        SeekBarlisteneer seekBarlisteneer = new SeekBarlisteneer();
+        seekBar_Reserve.setOnSeekBarChangeListener(seekBarlisteneer);
+        refersh_btn.setOnClickListener(refreshButtonListener);
 
         Intent intent = getIntent();
         movie_index = intent.getIntExtra("Movie_Index",-1);
@@ -111,6 +129,30 @@ public class ReservationActivity extends AppCompatActivity {
         public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
             Toast.makeText(ReservationActivity.this,i+"/"+(i1+1)+"/"+i2,Toast.LENGTH_SHORT).show();
             mv_date.setText(i+"/"+(i1+1)+"/"+i2);
+        }
+    }
+
+    class RefreshButtonListener implements View.OnClickListener{
+        @Override
+        public void onClick(View view) {
+            seekBar_Reserve.setProgress(0);
+        }
+    }
+    class SeekBarlisteneer implements SeekBar.OnSeekBarChangeListener{
+
+        @Override
+        public void onProgressChanged(SeekBar seekBar, int i, boolean b) {//seekBar 의 값
+            txt_Seekbar.setText("선택 좌석 : "+(i+1)+"명");
+        }
+
+        @Override
+        public void onStartTrackingTouch(SeekBar seekBar) {//seek에 손 대는 순간
+            //Toast.makeText(MainActivity.this,"start",Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onStopTrackingTouch(SeekBar seekBar) {//seek에 손을 뗄 때때
+            //Toast.makeText(MainActivity.this,"end",Toast.LENGTH_SHORT).show();
         }
     }
 }
