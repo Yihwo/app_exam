@@ -30,7 +30,7 @@ public class ReservationActivity extends AppCompatActivity {
     String[] movie_director;
     String[] movie_actor;
 
-    Button time_btn,date_btn,refersh_btn;
+    Button time_btn,date_btn,refersh_btn,btn_book,btn_cancle;
     TimeSetListener timeSetListener;
     DateSetListener dateSetListener;
     GregorianCalendar calendar;
@@ -61,10 +61,16 @@ public class ReservationActivity extends AppCompatActivity {
         time_btn = (Button)findViewById(R.id.time_btn);
         date_btn = (Button)findViewById(R.id.date_btn);
         refersh_btn = (Button)findViewById(R.id.refresh);
+        btn_book = (Button)findViewById(R.id.btn_book);
+        btn_cancle = (Button)findViewById(R.id.btn_cancle);
 
         TimeDateButtonListener timeDateButtonListener = new TimeDateButtonListener();
+        BookCancleButtonListener bookCancleButtonListener = new BookCancleButtonListener();
+
         time_btn.setOnClickListener(timeDateButtonListener);
         date_btn.setOnClickListener(timeDateButtonListener);
+        btn_book.setOnClickListener(bookCancleButtonListener);
+        btn_cancle.setOnClickListener(bookCancleButtonListener);
 
         timeSetListener = new TimeSetListener();
         dateSetListener = new DateSetListener();
@@ -101,7 +107,6 @@ public class ReservationActivity extends AppCompatActivity {
         }
     }
     class TimeDateButtonListener implements View.OnClickListener{
-
         @Override
         public void onClick(View view) {
             switch (view.getId()){
@@ -153,6 +158,21 @@ public class ReservationActivity extends AppCompatActivity {
         @Override
         public void onStopTrackingTouch(SeekBar seekBar) {//seek에 손을 뗄 때때
             //Toast.makeText(MainActivity.this,"end",Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    class BookCancleButtonListener implements View.OnClickListener{
+        @Override
+        public void onClick(View view) {
+            switch (view.getId()){
+                case R.id.btn_book:
+                    Intent intent_book = new Intent(ReservationActivity.this,BookCompActivity.class);
+                    startActivity(intent_book);
+                    break;
+                case R.id.btn_cancle:
+                    finish();
+                    break;
+            }
         }
     }
 }

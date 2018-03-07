@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="457dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="402dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline19"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="352dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="307dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline21"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="255dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline22"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="213dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline23"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="281dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline24"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="91dp" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="주의사항"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline21"
+        app:layout_constraintEnd_toStartOf="@+id/guideline24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline22" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="모바일 앱에서 예ㅒ매하신 건의 예매 취소는 모바일 앱, 전화, 홈페이지에서 취소하실 수 있습니다."
+        app:layout_constraintBottom_toTopOf="@+id/guideline20"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline21" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="고객 센터"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline19"
+        app:layout_constraintEnd_toStartOf="@+id/guideline24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline20" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="홈페이지"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline18"
+        app:layout_constraintEnd_toStartOf="@+id/guideline24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline19" />
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="위 치"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline17"
+        app:layout_constraintEnd_toStartOf="@+id/guideline24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline18" />
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="012-345-6789"
+        app:layout_constraintBottom_toTopOf="@+id/guideline19"
+        app:layout_constraintEnd_toStartOf="@+id/guideline23"
+        app:layout_constraintStart_toStartOf="@+id/guideline24"
+        app:layout_constraintTop_toTopOf="@+id/guideline20" />
+
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="www.cgv.co.kr"
+        app:layout_constraintBottom_toTopOf="@+id/guideline18"
+        app:layout_constraintEnd_toStartOf="@+id/guideline23"
+        app:layout_constraintStart_toStartOf="@+id/guideline24"
+        app:layout_constraintTop_toTopOf="@+id/guideline19" />
+
+    <TextView
+        android:id="@+id/textView18"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="충청북도 청주시 흥덕구 가경동 1416-3"
+        app:layout_constraintBottom_toTopOf="@+id/guideline17"
+        app:layout_constraintEnd_toStartOf="@+id/guideline23"
+        app:layout_constraintStart_toStartOf="@+id/guideline24"
+        app:layout_constraintTop_toTopOf="@+id/guideline18" />
+
+    <Button
+        android:id="@+id/btn_call"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="전화걸기"
+        app:layout_constraintBottom_toTopOf="@+id/guideline19"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline23"
+        app:layout_constraintTop_toTopOf="@+id/guideline20" />
+
+    <Button
+        android:id="@+id/btn_web"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="이동하기"
+        app:layout_constraintBottom_toTopOf="@+id/guideline18"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline23"
+        app:layout_constraintTop_toTopOf="@+id/guideline19"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/btn_map"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="지도보기"
+        app:layout_constraintBottom_toTopOf="@+id/guideline17"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline23"
+        app:layout_constraintTop_toTopOf="@+id/guideline18" />
+
+    <Button
+        android:id="@+id/btn_complete"
+        android:layout_width="221dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="확인"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline17" />
+</android.support.constraint.ConstraintLayout>
