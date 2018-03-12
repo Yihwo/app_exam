@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View view) {
             switch (view.getId()){
                 case R.id.btn_output:
+                    //output stream 자료를 파일로 보내기
                     //outputstream생성
                     FileOutputStream fos = null;
                     try{
@@ -50,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                     break;
                 case R.id.btn_input:
+                    //input stream 파일을 자료로 보내기
                     //Inputstream 생성
                     FileInputStream fis = null;
                     //자료를 저장할 공간 만들기
