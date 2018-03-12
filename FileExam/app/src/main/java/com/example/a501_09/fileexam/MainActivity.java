@@ -1,5 +1,6 @@
 package com.example.a501_09.fileexam;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
         btn_output = (Button)findViewById(R.id.btn_output);
 
         edittxt = (EditText)findViewById(R.id.editText);
+        btn_input.setOnClickListener(new ButtonClickedListener());
+        btn_output.setOnClickListener(new ButtonClickedListener());
     }
     class ButtonClickedListener implements View.OnClickListener{
         @Override
@@ -32,6 +35,19 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.btn_output:
                     //outputstream생성
                     FileOutputStream fos = null;
+                    try{
+                        //자료를 넣을 파일 생성
+                        fos = openFileOutput("test.txt", Context.MODE_PRIVATE);//저장할 이름과 접근 권한 설정
+                        //자료를 빈 파일에 저장
+                        String str_temp = "파일을 저장하는 예제";
+                        //파일에 자료를 저장 (Byte형태로 변환 후)
+                        fos.write(str_temp.getBytes());//파일에 저장할때 write사용
+                        //저장후 반드시 닫기
+                        fos.close();
+                    }
+                    catch(Exception e){
+                        Log.d("file stream","output stream error");
+                    }
                     break;
                 case R.id.btn_input:
                     //Inputstream 생성
@@ -43,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
                         //fis의 파일크기와 같은 크기의 byte배열을 생성
                         data = new byte[fis.available()];//available 파일의 바이트 수를 알려주는 함수
                         //data배열에 파일을 입력(byte형태)
-                        while(fis.read(data) != -1 ) {;}//read 파일을 읽어와 data배열에 넣음
+                        while(fis.read(data) != -1 ) {;}//read 함수로 파일을 읽어와 data배열에 넣음
                         //inputstream은 꼭 닫아주어야한다.
                         //닫지 않으면 프로그램 종료될때까지 계속 실행되기때문에
                         fis.close();
