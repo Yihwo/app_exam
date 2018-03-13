@@ -7,12 +7,14 @@ import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     ListView listView_01;
+    Button sign_btn;
 
     //리스트 뷰의 항목에 대한 설명
     //String[] list_ex = {"조선시대의 장군","고구려 시대의 왕","조선시대 화가이자 문인","조선시대의 왕"};
@@ -25,6 +27,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        sign_btn = (Button)findViewById(R.id.signIn_btn);
+        sign_btn.setOnClickListener(new SignInButtonListener());
 
         movie_title = getResources().getStringArray(R.array.movie_title);
         ArrayAdapter adapter = ArrayAdapter.createFromResource(
@@ -92,6 +97,15 @@ public class MainActivity extends AppCompatActivity {
 //            Toast.makeText(MainActivity.this,//출력할 페이지
 //                    movie_title[i], //출력할 메시지
 //                    Toast.LENGTH_SHORT).show();
+        }
+    }
+    class  SignInButtonListener implements View.OnClickListener{
+        @Override
+        public void onClick(View view) {
+            Intent intent;
+            intent= new Intent(MainActivity.this,SignInActivity.class);
+            //인텐트를 넘겨주는 함수
+            startActivity(intent);
         }
     }
 }

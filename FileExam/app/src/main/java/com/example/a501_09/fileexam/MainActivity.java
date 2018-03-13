@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         edittxt = (EditText)findViewById(R.id.editText);
         btn_input.setOnClickListener(new ButtonClickedListener());
         btn_output.setOnClickListener(new ButtonClickedListener());
+        btn_delete.setOnClickListener(new ButtonClickedListener());
     }
     class ButtonClickedListener implements View.OnClickListener{
         @Override
@@ -71,6 +72,13 @@ public class MainActivity extends AppCompatActivity {
                     }
                     catch (Exception e){
                         Log.d("file stream","input stream error");
+                    }
+                    break;
+                case R.id.btn_delete:
+                    try {
+                        deleteFile("test.txt");
+                    }catch(Exception e){
+                        Log.d("file stream",e.getStackTrace().toString());
                     }
                     break;
             }
