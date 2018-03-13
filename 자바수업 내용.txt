@@ -226,3 +226,7 @@ CompoundButton.OnCheckedChangeListener 로 작성한다.
 input stream : 파일에서 자료로 보내는 것
 output stream : 자료를 파일로 보내는 것
 파일 입출력을 사용할 때 try catch문을 꼭 사용해야 한다.
+
+Preference
+-사용하지 쉽지만 저장할 데이터가 많아지면 느려진다.
+-만들어질 파일 이름, 권한 필요
