@@ -230,3 +230,7 @@ output stream : 자료를 파일로 보내는 것
 Preference
 -사용하지 쉽지만 저장할 데이터가 많아지면 느려진다.
 -만들어질 파일 이름, 권한 필요
+
+리스트 뷰에서 자바 클래스를 새로 작성하고 레이아웃을 추가하여 리스트의 한 항목의 디자인이 가능하다.
+클래스를 생성할 때 슈퍼클래스를 BaseAdapter로 설정하고
+Overrides Dialog에서 getCount,getItem,getItemId,getView의 안드로이드 위젯을 선택하여 생성한다.
