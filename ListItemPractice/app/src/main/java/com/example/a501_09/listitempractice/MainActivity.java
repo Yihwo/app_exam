@@ -15,7 +15,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //항목 객체를 모아놓은 ArrayList생성
         arItem = new ArrayList<ItemFormat>();
+
+        //ArrayList에 자료 객체를 만들어어 입력
         arItem.add(new ItemFormat(R.drawable.aaa,R.drawable.bbb,
                 "candy","hamburger",
                 "12000원","14000원",

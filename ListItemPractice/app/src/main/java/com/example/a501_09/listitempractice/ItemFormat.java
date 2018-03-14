@@ -3,7 +3,7 @@ package com.example.a501_09.listitempractice;
 /**
  * Created by 501-09 on 2018-03-14.
  */
-
+//리스트 항목에 들어갈 정보
 public class ItemFormat {
     int item_image_left, item_image_right;
     String item_name_left, item_name_right;

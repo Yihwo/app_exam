@@ -7,6 +7,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+
     ArrayList<Item_dataFormet> arrayList;
 
     ListView listView;

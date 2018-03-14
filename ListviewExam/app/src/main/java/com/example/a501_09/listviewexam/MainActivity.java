@@ -1,6 +1,7 @@
 package com.example.a501_09.listviewexam;
 
 import android.content.Intent;
+import android.content.res.TypedArray;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,8 +13,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
     ListView listView_01;
+    ArrayList<MovieItemFormet> movieItem;
     Button sign_btn;
 
     //리스트 뷰의 항목에 대한 설명
@@ -22,24 +26,47 @@ public class MainActivity extends AppCompatActivity {
 //    String[] file_explain;
 //    String[] file_great;
 
-    String[] movie_title;
+//    String[] movie_title;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        String[] movie_title = getResources().getStringArray(R.array.movie_title);
+        String[] movie_type = getResources().getStringArray(R.array.movie_type);
+        TypedArray movie_img = getResources().obtainTypedArray(R.array.movie_img);
+
         sign_btn = (Button)findViewById(R.id.signIn_btn);
         sign_btn.setOnClickListener(new SignInButtonListener());
 
-        movie_title = getResources().getStringArray(R.array.movie_title);
-        ArrayAdapter adapter = ArrayAdapter.createFromResource(
-                MainActivity.this,
-                R.array.movie_title,
-                android.R.layout.simple_list_item_1);
+        movieItem = new ArrayList<MovieItemFormet>();
+        for(int i = 0;i<movie_title.length;i++) {
+            movieItem.add(new MovieItemFormet(movie_img.getResourceId(i,-1), movie_title[i], movie_type[i]));
+        }
+
         listView_01 = (ListView)findViewById(R.id.listView_01);
-        listView_01.setAdapter(adapter);
-        ListViewListener listViewListener = new ListViewListener();
-        listView_01.setOnItemClickListener(listViewListener);
+        listView_01.setAdapter(new MovieItemAdapter(MainActivity.this,movieItem,R.layout.movielist_item));
+
+        listView_01.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent;
+                intent= new Intent(MainActivity.this,ExplainActivity.class);
+                intent.putExtra("Movie_Index",i);
+
+                //인텐트를 넘겨주는 함수
+                startActivityForResult(intent,1);//requestCode는 순서를 확인하기 위한 장치
+            }
+        });
+//        movie_title = getResources().getStringArray(R.array.movie_title);
+//        ArrayAdapter adapter = ArrayAdapter.createFromResource(
+//                MainActivity.this,
+//                R.array.movie_title,
+//                android.R.layout.simple_list_item_1);
+//        listView_01 = (ListView)findViewById(R.id.listView_01);
+//        listView_01.setAdapter(adapter);
+//        ListViewListener listViewListener = new ListViewListener();
+//        listView_01.setOnItemClickListener(listViewListener);
 
 
         /////////////////////////////////리스트뷰 실습//////////////////////////////////////////
