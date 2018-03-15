@@ -240,3 +240,11 @@ app 폴더 -> res -> values -> <style name="AppTheme" parent="Theme.AppCompat.Ligh
 기존의 툴바를 사라지게 한다.
 툴바 객체 생성시 android.support.v7.widget.Toolbar 로 생성해야한다.
 객체 생성 이후 setSupportActionBar(toolbar이름); 를 통해 뷰에 나타낸다.
+toolbar 메뉴 아이템을 추가할 때 show as action을 통해 버튼 형식으로 변환이 가능하다.
+(공간에 따라서 드랍다운혹은 아이콘 형태로 변환)
+toolbar를 사용하기 위해서 onOptionsItemSelected, onCreateOptionsMenu 함수가 필요
+
+Debug
+1. 브레이크 포인트 설정(포인트 전 까지만 실행됨)
+2. f8 버튼을 누를때마다 한줄씩 실행
+* Log.d("keyword","출력내용"); 를 통해서 로그창에서 간단한 값 확인이 가능하다.

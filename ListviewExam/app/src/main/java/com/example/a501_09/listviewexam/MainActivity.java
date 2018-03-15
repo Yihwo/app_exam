@@ -21,7 +21,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     ListView listView_01;
     ArrayList<MovieItemFormet> movieItem;
-//    Button sign_btn;
+    Button sign_btn;
     Toolbar movie_main_toolbar;
 
     //리스트 뷰의 항목에 대한 설명
