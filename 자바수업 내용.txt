@@ -253,3 +253,30 @@ Progress Bar
 -원형 프로그래스 바 : 언제 끝날지 모르는 작업이 진행 중일 때
 -바형 프로그래스 바 : 진행 상황을 보여 줄 때
 프로그래스 바의 함수를 통해 설정이 가능함
+*보통 프로그래스바는 스레드를 같이 사용함
+
+thread
+여러 작업을 진행 할 때 작업을 분할하여 할당하는데 할당받는 연산자를 스레드라고 한다.
+스레드를 만들면 핸들러를 통해서 메인 스레드에 메시지를 보내어 작업을 요청한다.
+
+-작업 순서
+1. 메인 스레드가 스레드 들에 작업을 분담 
+2. 스레드들이 작업을 완료 
+3. Handler가 스레드 들의 작업이 완료되었다는 메시지를 메인 스레드에 송신
+
+class MyThread(스레드 이름) extends Thread{
+        public void run(){ //실제 동작하는 함수 run
+            try{
+                스레드 작업
+            }catch(Exception e){
+                handler.sendEmptyMessage(0);
+            }
+        }
+    }
+    //헨들러 만들기
+    //ui관련 처리를 위해 스레드에서 메인 스레드로 요청하기 위함
+    Handler handler(핸들러 이름) = new Handler(){
+        public void handleMessage(Message msg){
+            원하는 작업
+        }
+    };
