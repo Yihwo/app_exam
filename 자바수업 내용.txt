@@ -234,3 +234,9 @@ Preference
 리스트 뷰에서 자바 클래스를 새로 작성하고 레이아웃을 추가하여 리스트의 한 항목의 디자인이 가능하다.
 클래스를 생성할 때 슈퍼클래스를 BaseAdapter로 설정하고
 Overrides Dialog에서 getCount,getItem,getItemId,getView의 안드로이드 위젯을 선택하여 생성한다.
+
+ToolBar--
+app 폴더 -> res -> values -> <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+기존의 툴바를 사라지게 한다.
+툴바 객체 생성시 android.support.v7.widget.Toolbar 로 생성해야한다.
+객체 생성 이후 setSupportActionBar(toolbar이름); 를 통해 뷰에 나타낸다.

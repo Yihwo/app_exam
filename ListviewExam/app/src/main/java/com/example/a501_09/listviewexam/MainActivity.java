@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.content.res.TypedArray;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
@@ -18,7 +21,8 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     ListView listView_01;
     ArrayList<MovieItemFormet> movieItem;
-    Button sign_btn;
+//    Button sign_btn;
+    Toolbar movie_main_toolbar;
 
     //리스트 뷰의 항목에 대한 설명
     //String[] list_ex = {"조선시대의 장군","고구려 시대의 왕","조선시대 화가이자 문인","조선시대의 왕"};
@@ -26,18 +30,37 @@ public class MainActivity extends AppCompatActivity {
 //    String[] file_explain;
 //    String[] file_great;
 
-//    String[] movie_title;
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()){
+            case R.id.login_select_item:
+                Toast.makeText(MainActivity.this, "log in page", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.signin_select_item:
+                Intent intent;
+                intent= new Intent(MainActivity.this,SignInActivity.class);
+                //인텐트를 넘겨주는 함수
+                startActivity(intent);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    //    String[] movie_title;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        movie_main_toolbar = (Toolbar)findViewById(R.id.movie_main_toolbar);
+        setSupportActionBar(movie_main_toolbar);
+
         String[] movie_title = getResources().getStringArray(R.array.movie_title);
         String[] movie_type = getResources().getStringArray(R.array.movie_type);
         TypedArray movie_img = getResources().obtainTypedArray(R.array.movie_img);
 
-        sign_btn = (Button)findViewById(R.id.signIn_btn);
-        sign_btn.setOnClickListener(new SignInButtonListener());
+//        sign_btn = (Button)findViewById(R.id.signIn_btn);
+//        sign_btn.setOnClickListener(new SignInButtonListener());
 
         movieItem = new ArrayList<MovieItemFormet>();
         for(int i = 0;i<movie_title.length;i++) {
@@ -108,6 +131,13 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        });
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.movie_main_menu,menu);
+        return true;
+    }
+
     //리스트 뷰 리스너 만들기
     class ListViewListener implements AdapterView.OnItemClickListener{
 
@@ -126,13 +156,13 @@ public class MainActivity extends AppCompatActivity {
 //                    Toast.LENGTH_SHORT).show();
         }
     }
-    class  SignInButtonListener implements View.OnClickListener{
-        @Override
-        public void onClick(View view) {
-            Intent intent;
-            intent= new Intent(MainActivity.this,SignInActivity.class);
-            //인텐트를 넘겨주는 함수
-            startActivity(intent);
-        }
-    }
+//    class  SignInButtonListener implements View.OnClickListener{
+//        @Override
+//        public void onClick(View view) {
+//            Intent intent;
+//            intent= new Intent(MainActivity.this,SignInActivity.class);
+//            //인텐트를 넘겨주는 함수
+//            startActivity(intent);
+//        }
+//    }
 }
