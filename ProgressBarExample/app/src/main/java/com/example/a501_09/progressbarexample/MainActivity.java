@@ -4,6 +4,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -85,6 +86,25 @@ public class MainActivity extends AppCompatActivity {
                     //스레드 실행 4. 핸들러에게 작업을 마쳤음을 보고
                     handler.sendEmptyMessage(1);//what = 스레드의 번호
                     break;
+                case 2:
+                    try {
+                        while (true){
+                            Thread.sleep(1000);
+                            //스레드 실행 4. 핸들러에게 작업을 마쳤음을 보고
+                            handler.sendEmptyMessage(2);//what = 스레드의 번호
+                        }
+                    } catch (Exception e) {
+                    }
+                    break;
+                case 3:
+                    while(true){
+                        try{
+                            Thread.sleep(1000);
+                            int number=0;
+                            Log.d("Number",Integer.toString(number));
+                                    number++;
+                        }catch(Exception e){}
+                    }
             }
         }
     }
@@ -103,6 +123,13 @@ public class MainActivity extends AppCompatActivity {
                 case 1:
                     Toast.makeText(MainActivity.this, "toast", Toast.LENGTH_SHORT).show();
                     break;
+                case 2:
+                    String text = toast_btn.getText().toString();
+                    if(text.equals("toast")){
+                        toast_btn.setText("toast!!!!!");
+                    }else{
+                        toast_btn.setText("toast");
+                    }
             }
         }
     };
