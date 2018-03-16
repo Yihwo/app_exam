@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <array name = "movie_img">
-        <item>@drawable/harrypotter</item>
-        <item>@drawable/welcome</item>
-        <item>@drawable/movieimage</item>
-        <item>@drawable/harrypotter</item>
+        <item>@drawable/asdf</item>
+        <item>@drawable/asdf</item>
+        <item>@drawable/asdf</item>
+        <item>@drawable/asdf</item>
     </array>
 </resources>

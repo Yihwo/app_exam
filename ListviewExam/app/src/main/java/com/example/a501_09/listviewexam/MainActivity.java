@@ -12,6 +12,7 @@ import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -132,6 +133,12 @@ public class MainActivity extends AppCompatActivity {
 //        });
     }
 
+//    @Override
+//    public void onDestroy(){
+//        super.onDestroy();
+//        ImageView.setImageDrawable(null);
+//    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.movie_main_menu,menu);
@@ -140,14 +147,11 @@ public class MainActivity extends AppCompatActivity {
 
     //리스트 뷰 리스너 만들기
     class ListViewListener implements AdapterView.OnItemClickListener{
-
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {//int는 눌려진 리스트의 index 번호
-
             Intent intent;
             intent= new Intent(MainActivity.this,ExplainActivity.class);
             intent.putExtra("Movie_Index",i);
-
             //인텐트를 넘겨주는 함수
             startActivityForResult(intent,1);//requestCode는 순서를 확인하기 위한 장치
 
