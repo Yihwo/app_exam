@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
             String buf="";
             String buf_1 = "";
             for (int i = 0;i<items.getLength();i++){
-                //item 태그의 값들을 각각 node에 저장
+                //item 태그의 값들을 각각 떼어내 node에 저장
                 Node item = items.item(i);
                 String value = item.getFirstChild().getNodeValue();
 
