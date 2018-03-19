@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="photo_pack">
+        <item>mon_1/mon_b/mon_c</item>
+        <item>gh_a/gh_b/gh_c</item>
+        <item>bp_a/bp_b/bp_c</item>
+        <item>rs_a/rs_b/rs_c</item>
+    </string-array>
+</resources>

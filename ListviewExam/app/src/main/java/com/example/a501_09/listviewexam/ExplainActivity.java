@@ -24,11 +24,13 @@ import java.util.ArrayList;
  */
 
 public class ExplainActivity extends AppCompatActivity {
+
     LinearLayout image_scroll;
     String[] movie_title;
     String[] movie_type;
     String[] movie_director;
     String[] movie_actor;
+    String[] movie_photo_pack;
 
     TypedArray movie_img;
     TypedArray movie_mon_scroll;
@@ -55,7 +57,7 @@ public class ExplainActivity extends AppCompatActivity {
 
         image_scroll = (LinearLayout) findViewById(R.id.image_scroll);
 
-      //  back_btn = (ImageButton) findViewById(R.id.back_btn);
+        //  back_btn = (ImageButton) findViewById(R.id.back_btn);
         BackButtonListener backButtonListener = new BackButtonListener();
         //back_btn.setOnClickListener(backButtonListener);
 
@@ -72,6 +74,8 @@ public class ExplainActivity extends AppCompatActivity {
         movie_gh_scroll = getResources().obtainTypedArray(R.array.movie_gh_scroll);
         movie_bp_scroll = getResources().obtainTypedArray(R.array.movie_bp_scroll);
         movie_rs_scroll = getResources().obtainTypedArray(R.array.movie_rs_scroll);
+        //180319
+        movie_photo_pack = getResources().getStringArray(R.array.photo_pack);
 
         mv_title = (TextView) findViewById(R.id.movie_title);
         mv_type = (TextView) findViewById(R.id.movie_type);
@@ -97,11 +101,23 @@ public class ExplainActivity extends AppCompatActivity {
             mv_director.setText(movie_director[movie_index]);
             mv_actor.setText(movie_actor[movie_index]);
 
+            ImageView movie_scroll_view;
+            String img_pack_str;
+            String[] split_img_pack;
             switch (movie_index) {
                 case 0:
-                    for(int i=0; i<movie_mon_scroll.length();i++){
-                        ImageView movie_scroll_view = new ImageView(ExplainActivity.this);
-                        movie_scroll_view.setImageResource(movie_mon_scroll.getResourceId(i, -1));
+                    movie_scroll_view = new ImageView(ExplainActivity.this);
+                    //이미지 이름 불러오기
+                    img_pack_str = movie_photo_pack[movie_index];
+                    split_img_pack = img_pack_str.split("/");
+
+                    for (int j = 0; j < split_img_pack.length; j++) {
+                        //이미지 이름으로 이미지 아이디 찾기
+                        String file_name = "@drawable/" + split_img_pack[j];
+                        int img_id = getResources().getIdentifier(file_name, "drawable", this.getPackageName());
+
+                        //이미지 적용하기
+                        movie_scroll_view.setImageResource(img_id);
                         //img.setImageResource(arrayList.get(i).img_id);
                         movie_scroll_view.setLayoutParams(new LinearLayout.LayoutParams(200, 300));//레이아웃 각각의 크기 설정
                         movie_scroll_view.setScaleType(ImageView.ScaleType.FIT_XY);//이미지 사이즈를 이미지 뷰에 맞게 맞추어줌
@@ -109,19 +125,18 @@ public class ExplainActivity extends AppCompatActivity {
                     }
                     break;
                 case 1:
-                    for(int i=0; i<movie_gh_scroll.length();i++){
-                        ImageView movie_scroll_view = new ImageView(ExplainActivity.this);
-                        movie_scroll_view.setImageResource(movie_gh_scroll.getResourceId(i, -1));
-                        //img.setImageResource(arrayList.get(i).img_id);
-                        movie_scroll_view.setLayoutParams(new LinearLayout.LayoutParams(200, 300));//레이아웃 각각의 크기 설정
-                        movie_scroll_view.setScaleType(ImageView.ScaleType.FIT_XY);//이미지 사이즈를 이미지 뷰에 맞게 맞추어줌
-                        image_scroll.addView(movie_scroll_view);
-                    }
-                    break;
-                case 2:
-                    for(int i=0; i<movie_bp_scroll.length();i++){
-                        ImageView movie_scroll_view = new ImageView(ExplainActivity.this);
-                        movie_scroll_view.setImageResource(movie_bp_scroll.getResourceId(i, -1));
+                    movie_scroll_view = new ImageView(ExplainActivity.this);
+                    //이미지 이름 불러오기
+                    img_pack_str = movie_photo_pack[movie_index];
+                    split_img_pack = img_pack_str.split("/");
+
+                    for (int j = 0; j < split_img_pack.length; j++) {
+                        //이미지 이름으로 이미지 아이디 찾기
+                        String file_name = "@drawable/" + split_img_pack[j];
+                        int img_id = getResources().getIdentifier(file_name, "drawable", this.getPackageName());
+
+                        //이미지 적용하기
+                        movie_scroll_view.setImageResource(img_id);
                         //img.setImageResource(arrayList.get(i).img_id);
                         movie_scroll_view.setLayoutParams(new LinearLayout.LayoutParams(200, 300));//레이아웃 각각의 크기 설정
                         movie_scroll_view.setScaleType(ImageView.ScaleType.FIT_XY);//이미지 사이즈를 이미지 뷰에 맞게 맞추어줌
@@ -129,9 +144,18 @@ public class ExplainActivity extends AppCompatActivity {
                     }
                     break;
                 case 3:
-                    for(int i=0; i<movie_rs_scroll.length();i++){
-                        ImageView movie_scroll_view = new ImageView(ExplainActivity.this);
-                        movie_scroll_view.setImageResource(movie_rs_scroll.getResourceId(i, -1));
+                    movie_scroll_view = new ImageView(ExplainActivity.this);
+                    //이미지 이름 불러오기
+                    img_pack_str = movie_photo_pack[movie_index];
+                    split_img_pack = img_pack_str.split("/");
+
+                    for (int j = 0; j < split_img_pack.length; j++) {
+                        //이미지 이름으로 이미지 아이디 찾기
+                        String file_name = "@drawable/" + split_img_pack[j];
+                        int img_id = getResources().getIdentifier(file_name, "drawable", this.getPackageName());
+
+                        //이미지 적용하기
+                        movie_scroll_view.setImageResource(img_id);
                         //img.setImageResource(arrayList.get(i).img_id);
                         movie_scroll_view.setLayoutParams(new LinearLayout.LayoutParams(200, 300));//레이아웃 각각의 크기 설정
                         movie_scroll_view.setScaleType(ImageView.ScaleType.FIT_XY);//이미지 사이즈를 이미지 뷰에 맞게 맞추어줌
@@ -143,11 +167,11 @@ public class ExplainActivity extends AppCompatActivity {
         }
 
 
-
     }
 
     class DataFormat {
         int img_Id;
+
         public DataFormat(int img_Id) {
             this.img_Id = img_Id;
         }
