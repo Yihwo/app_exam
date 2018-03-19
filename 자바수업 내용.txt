@@ -312,3 +312,14 @@ xml형태
 <root>
 	<item Maker=""></item>
 </root>
+
+lifecircle 부족한 사용환경에서 여러 정보를 띄워주기 위해 출력되지 않는 화면을 
+Activity : 활성, 정지, 종료 상태
+화면 activity 활성 (화면A)
+onCreat() -> onStart() ->onResume()
+다른 Activity 가 앞에 호출 될때 이전 Activity(화면 A) 는 일시정지
+onResume() -> onPause()
+Activity 재 호출
+onPause() -> onStop() -> onRestart() -> onStrat() -> onResume()
+Activity 종료
+onPause() -> onStop() -> inDestroy()
