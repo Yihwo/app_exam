@@ -23,13 +23,20 @@ public class MainActivity extends AppCompatActivity {
         setComponent();
 
     }
-
+    //asynctask객체를 생성하기 위한 클래스
+    //자료형에 주의 해야 함<A,B,C>
+    //A : doImBackground()함수의 매계변수 형태
+    //B : onProgressUpdate()함수의 매계변수 형태
+    //C : onPostExecute()함수의 매계변수 형태
     class MyAnsyncTask extends AsyncTask<Void,Void,Void>{
+        //작업 시작 전에 계산을 위한 초기화, 컴포넌트값 초기화(프로그래스바 표시)를 처리하는 함수
         protected void onPreExecute(){
             count_value = 0;
         }
+        //작업을 진행하는 함수, publishProgress()함수를 호출하여 진행사항을 앱 화면에 표시함
         protected Void doInBackground(Void... arg) {//Void의 v 는 대문자로 시작,
                                                     // Void... arg = 일에 필요한 자료가 많을 수 있기 때문에 ...으로 생략
+            //siCancelled()작업이 최소 되었는지 확인하는 함수
             while(isCancelled()==false){
                 count_value++;
                 if (count_value<=1000){
@@ -43,12 +50,12 @@ public class MainActivity extends AppCompatActivity {
             }
             return null;
         }
-        //작업이 진행되는동안 체크해주는 함수
-        protected void onProgressUpdate(Void... arg){
+        //작업이 진행되는동안 진행사항을 표기하기 위한 함수,publishProgress()함수를 호출하면 동작
+            protected void onProgressUpdate(Void... arg){
             progressBar.setVisibility(View.VISIBLE);
-            txt_cont.setText(Integer.toString(count_value));
+            txt_cont.setText("분"+Integer.toString(count_value/60)+" "+Integer.toString(count_value%60)+"초");
         }
-        //작업을 마치고 종료
+        //작업을 마치고 종료되었을때 호출,odInbackground()함수의 리턴값을 매개변수로 받는다.
         protected void onPostExecute(Void result){
             progressBar.setVisibility(View.INVISIBLE);
             count_value = 0;
