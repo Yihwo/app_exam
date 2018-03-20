@@ -323,3 +323,12 @@ Activity 재 호출
 onPause() -> onStop() -> onRestart() -> onStrat() -> onResume()
 Activity 종료
 onPause() -> onStop() -> inDestroy()
+
+해당 Activity에 해당하는 뷰를 지정할때 getApplicationContext()로 표현가능
+*isCancelled()의 값은 동작시에 true
+
+AsyncTask는 thread+handler 역할을 하는 기능
+Asynctask에서  Void... arg sms void 자료형이 많은 경우 arg로 명명된 배열행태로 
+자료를 전달, Integer...,Boolean...으로도 사용 가능
+값이 있는 Integer 같은 경우 int a= arg[n]의 형태로 값을 사용할 수 있다.
+작업의 진행은 보통 [onPreExecute()] -> [doInBackground()] -> [onPostExecute()] 의 순서로 진행된다.
