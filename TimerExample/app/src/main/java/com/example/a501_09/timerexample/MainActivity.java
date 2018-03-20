@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     Button btn_start,btn_stop,btn_10m,btn_5m,btn_1m,btn_10s;
@@ -63,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
             count_value = 0;
             txt_min.setText("0분");
             txt_sec.setText("0초");
+            Toast.makeText(getApplicationContext(), "타이머가 완료되었습니다.", Toast.LENGTH_SHORT).show();
         }
         //작업을 중단하였을때 실행되는 함수
         protected void onCancelled(){
