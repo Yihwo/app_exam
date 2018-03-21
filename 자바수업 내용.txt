@@ -356,3 +356,5 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService{} 생성
 Push sever  (2)<-   ->(5)  FCM  ->(1)(6)  App
    (3)|(4)
  database
+
+SD card에서 파일을 사용하려면 파일의 위치와 파일 이름을 알아야함
