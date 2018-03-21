@@ -326,9 +326,33 @@ onPause() -> onStop() -> inDestroy()
 
 해당 Activity에 해당하는 뷰를 지정할때 getApplicationContext()로 표현가능
 *isCancelled()의 값은 동작시에 true
+*Pending Intent - 앱이 활성화 되지 않아도 intent처리 가능
 
 AsyncTask는 thread+handler 역할을 하는 기능
 Asynctask에서  Void... arg sms void 자료형이 많은 경우 arg로 명명된 배열행태로 
 자료를 전달, Integer...,Boolean...으로도 사용 가능
 값이 있는 Integer 같은 경우 int a= arg[n]의 형태로 값을 사용할 수 있다.
 작업의 진행은 보통 [onPreExecute()] -> [doInBackground()] -> [onPostExecute()] 의 순서로 진행된다.
+
+push 메세지의 전달 과정
+push server -> FCM -> 스마트폰
+tools -> fireBase -> cloud messageing -> FCM에 계정 연동 -> connected ->
+public class MyFirebaseInstanceIDServer extends FirebaseInstanceIdService{} 클래스 생성
+-> Firebase 토큰 onTokenRefresh()함수 입력 -> manufests에 service등록
+public class MyFirebaseMessagingService extends FirebaseMessagingService{} 생성
+-> public void onMessageReceived(RemoteMessage remoteMessage) {}함수 입력
+
+메세지 보내기 - 토큰을 통해 각자의 앱을 구분하고 특정하여 메세지를 보낼 수 있음
+사용자 세그먼트 = 전체
+주제 = 그룹
+단일기기 = 개인
+
+(1) FCM이 app에 토큰 부여
+(2) 토큰 전달
+(3) 토큰을 DB에 저장
+(4) 토큰을 검색
+(5) 수신자의 토큰을 전달
+(6) 메세지를 보냄
+Push sever  (2)<-   ->(5)  FCM  ->(1)(6)  App
+   (3)|(4)
+ database
