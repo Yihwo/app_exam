@@ -113,7 +113,6 @@ public class ExplainActivity extends AppCompatActivity {
             String[] split_img_pack;
             switch (movie_index) {
                 case 0:
-                    movie_scroll_view = new ImageView(ExplainActivity.this);
                     //이미지 이름 불러오기
 //                    img_pack_str = movie_photo_pack[movie_index];
 //                    split_img_pack = img_pack_str.split("/");
@@ -129,6 +128,8 @@ public class ExplainActivity extends AppCompatActivity {
                     options0.inSampleSize = 4;//이미지를 1/n 크기로 줄여줌
                     Bitmap bitmap_0;
                     for (int i = 0; i < movie_sdcard_img.size(); i++) {
+                        movie_scroll_view = new ImageView(ExplainActivity.this);
+
                         File img_file = new File(movie_sdcard_img.get(i));
                         //파일을 그림 형식으로 변환하기 위해 bitmap 객체로 생성
                         bitmap_0 = BitmapFactory.decodeFile(img_file.getAbsolutePath(), options0);
@@ -151,7 +152,6 @@ public class ExplainActivity extends AppCompatActivity {
 
                     break;
                 case 1:
-                    movie_scroll_view = new ImageView(ExplainActivity.this);
                     //이미지 이름 불러오기
 //                    img_pack_str = movie_photo_pack[movie_index];
 //                    split_img_pack = img_pack_str.split("/");
@@ -168,6 +168,8 @@ public class ExplainActivity extends AppCompatActivity {
                     Bitmap bitmap_1;
 
                     for (int i = 0; i < movie_sdcard_img.size(); i++) {
+                        movie_scroll_view = new ImageView(ExplainActivity.this);
+
                         File img_file = new File(movie_sdcard_img.get(i));
                         //파일을 그림 형식으로 변환하기 위해 bitmap 객체로 생성
                         bitmap_1 = BitmapFactory.decodeFile(img_file.getAbsolutePath(), options1);
@@ -182,7 +184,6 @@ public class ExplainActivity extends AppCompatActivity {
                     }
                     break;
                 case 2:
-                    movie_scroll_view = new ImageView(ExplainActivity.this);
                     //이미지 이름 불러오기
 //                    img_pack_str = movie_photo_pack[movie_index];
 //                    split_img_pack = img_pack_str.split("/");
@@ -198,6 +199,8 @@ public class ExplainActivity extends AppCompatActivity {
                     options2.inSampleSize = 4;//이미지를 1/n 크기로 줄여줌
                     Bitmap bitmap_2;
                     for (int i = 0; i < movie_sdcard_img.size(); i++) {
+                        movie_scroll_view = new ImageView(ExplainActivity.this);
+
                         File img_file = new File(movie_sdcard_img.get(i));
                         //파일을 그림 형식으로 변환하기 위해 bitmap 객체로 생성
                         bitmap_2 = BitmapFactory.decodeFile(img_file.getAbsolutePath(), options2);
@@ -212,7 +215,6 @@ public class ExplainActivity extends AppCompatActivity {
                     }
                     break;
                 case 3:
-                    movie_scroll_view = new ImageView(ExplainActivity.this);
                     //이미지 이름 불러오기
 //                    img_pack_str = movie_photo_pack[movie_index];
 //                    split_img_pack = img_pack_str.split("/");
@@ -228,6 +230,7 @@ public class ExplainActivity extends AppCompatActivity {
                     options3.inSampleSize = 4;//이미지를 1/n 크기로 줄여줌
                     Bitmap bitmap_3;
                     for (int i = 0; i < movie_sdcard_img.size(); i++) {
+                        movie_scroll_view = new ImageView(ExplainActivity.this);
                         File img_file = new File(movie_sdcard_img.get(i));
                         //파일을 그림 형식으로 변환하기 위해 bitmap 객체로 생성
                         bitmap_3 = BitmapFactory.decodeFile(img_file.getAbsolutePath(), options3);
@@ -241,7 +244,6 @@ public class ExplainActivity extends AppCompatActivity {
                         image_scroll.addView(movie_scroll_view);
                     }
                     break;
-
             }
             mv_image.setImageResource(movie_img.getResourceId(movie_index, -1)); // 이미지 뷰에 이미지를 설정
         }
