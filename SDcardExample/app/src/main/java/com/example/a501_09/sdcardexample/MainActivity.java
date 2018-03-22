@@ -84,15 +84,21 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.btn_find_image:
                     img_array = FindFileNameExtend("jpg");
                     txt_fileName.setText("");
-                    for (int i = 0; i < img_array.size(); i++) {
+                                        for (int i = 0; i < img_array.size(); i++) {
                         String temp = txt_fileName.getText().toString();
                         txt_fileName.setText(temp + img_array.get(i) + "\n");
                     }
+                    //이미지의 크기 조정
+                    BitmapFactory.Options options = new BitmapFactory.Options();
+                    options.inSampleSize=2;//이미지를 1/n 크기로 줄여줌
+
                     File img_file = new File(img_array.get(0));
                     //파일을 그림 형식으로 변환하기 위해 bitmap 객체로 생성
-                    Bitmap bitmap = BitmapFactory.decodeFile(img_file.getAbsolutePath());
+                    Bitmap bitmap = BitmapFactory.decodeFile(img_file.getAbsolutePath(),options);
+                    //비트맵 객체를 원하는 크기로 조정
+                    Bitmap bitmap_resize = Bitmap.createScaledBitmap(bitmap,40,20,true);
                     //이미지 뷰에서 bitmap에 저장된 파일을 출력
-                    img_file_view.setImageBitmap(bitmap);
+                    img_file_view.setImageBitmap(bitmap_resize);
                     break;
                 case R.id.btn_find_music:
                     music_array = FindFileNameExtend("mp3");

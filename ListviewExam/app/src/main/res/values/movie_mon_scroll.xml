@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <array name = "movie_mon_scroll">
-        <item>@drawable/mon_a</item>
-        <item>@drawable/mon_b</item>
-        <item>@drawable/mon_c</item>
+        <!--<item>@drawable/mon_a</item>-->
+        <!--<item>@drawable/mon_b</item>-->
+        <!--<item>@drawable/mon_c</item>-->
         <!--<item><item>@drawable/gh_a</item><item>@drawable/gh_b</item><item>@drawable/gh_c</item></item>-->
         <!--<item><item>@drawable/bp_a</item><item>@drawable/bp_b</item><item>@drawable/bp_c</item></item>-->
         <!--<item><item>@drawable/rs_a</item><item>@drawable/rs_b</item><item>@drawable/rs_c</item></item>-->

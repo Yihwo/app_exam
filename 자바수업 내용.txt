@@ -357,4 +357,10 @@ Push sever  (2)<-   ->(5)  FCM  ->(1)(6)  App
    (3)|(4)
  database
 
-SD card에서 파일을 사용하려면 파일의 위치와 파일 이름을 알아야함
+SD card에서 파일을 사용하려면 파일의 위치와 파일 이름을 알아야한다.
+
+이미지 크기 조정 
+BitmapFactory.Options options = new BitmapFactory.Options();
+options.inSampleSize=2;//이미지를 1/n 크기로 줄여줌
+Bitmap bitmap = BitmapFactory.decodeFile(img_file.getAbsolutePath(),options);
+Bitmap bitmap_resize = Bitmap.createScaledBitmap(bitmap,40,20,true);
