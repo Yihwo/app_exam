@@ -82,12 +82,12 @@ public class MainActivity extends AppCompatActivity {
         btn_nxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(mp3_index == 4){
-                    return;
-                }
-                if (mp3_index < mp3_array.size()) {
+                if (mp3_index < mp3_array.size()-1) {
                     mp3_index++;
+                }else{
+                    mp3_index=0;
                 }
+                //mp3_index = (mp3_index<0) ? mp3_index++ : (0);//3항 연산자로 표현
                 txt_title.setText(mp3_array.get(mp3_index));
 
                 try {
@@ -111,7 +111,10 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (mp3_index > 0) {
                     mp3_index--;
+                }else{
+                    mp3_index = mp3_array.size()-1;
                 }
+                //mp3_index = (mp3_index<0) ? mp3_index-- : (mp3_array.size()-1);//3항 연산자로 표현
                 try {
                     if (player.isPlaying()) {
                         player.stop();
