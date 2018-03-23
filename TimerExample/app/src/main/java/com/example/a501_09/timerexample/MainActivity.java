@@ -67,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
                     count_value=0;
                     break;
             }
+            music_progress.setMax(count_value);
         }
         //작업을 진행하는 함수, publishProgress()함수를 호출하여 진행사항을 앱 화면에 표시함
         protected Void doInBackground(Void... arg) {//Void의 v 는 대문자로 시작,
@@ -74,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
             //siCancelled()작업이 최소 되었는지 확인하는 함수
             while(isCancelled()==false){
                 count_value--;
+                music_progress.incrementProgressBy(1);
                 if (count_value > 0){
                     publishProgress();//제대로 작동하고 있는지 검사하기 위한 함수
                 }else{
@@ -89,15 +91,10 @@ public class MainActivity extends AppCompatActivity {
         protected void onProgressUpdate(Void... arg){
             txt_min.setText(Integer.toString(count_value/60)+"분");
             txt_sec.setText(Integer.toString(count_value%60)+"초");
-            if(player.isPlaying()){
-                music_progress.incrementProgressBy(1);
-            }
         }
         //작업을 마치고 종료되었을때 호출,odInbackground()함수의 리턴값을 매개변수로 받는다.
         protected void onPostExecute(Void result){
             player.start();
-            music_progress.setMax(total);
-
             count_value = 0;
             txt_min.setText("0분");
             txt_sec.setText("0초");
@@ -153,6 +150,7 @@ public class MainActivity extends AppCompatActivity {
                     txt_sec.setText("10초");
                     break;
                 case R.id.btn_start:
+                    music_progress.setProgress(0);
                     if(myAnsyncTask==null) {
                         myAnsyncTask = new MyAnsyncTask();
                         //asynctask 실행
