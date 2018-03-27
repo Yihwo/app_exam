@@ -364,3 +364,10 @@ BitmapFactory.Options options = new BitmapFactory.Options();
 options.inSampleSize=2;//이미지를 1/n 크기로 줄여줌
 Bitmap bitmap = BitmapFactory.decodeFile(img_file.getAbsolutePath(),options);
 Bitmap bitmap_resize = Bitmap.createScaledBitmap(bitmap,40,20,true);
+
+
+구글 android api키 받은 후 
+build.gradle(Module:app) 에서 dependencies 에
+implementation 'com.google.android.gms:play-services-maps:11.8.0'
+implementation 'com.google.android.gms:play-services-location:11.8.0'
+추가
