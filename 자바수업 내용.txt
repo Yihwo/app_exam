@@ -371,3 +371,5 @@ build.gradle(Module:app) 에서 dependencies 에
 implementation 'com.google.android.gms:play-services-maps:11.8.0'
 implementation 'com.google.android.gms:play-services-location:11.8.0'
 추가
+flagment = layout을 나누어 따로 활용
+layout에 flagment를 추가하고 manifast에 권한설정 및 api 키 추가
