@@ -373,3 +373,17 @@ implementation 'com.google.android.gms:play-services-location:11.8.0'
 추가
 flagment = layout을 나누어 따로 활용
 layout에 flagment를 추가하고 manifast에 권한설정 및 api 키 추가
+
+splash 띄우기
+1. drawable 폴더에 스플레쉬할 화면의 xml 파일 생성
+2. drawable의 스플레쉬 xml의 화면 구성하기
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@color/colorSplashBackground"></item> //배경 색 지정
+    <item android:gravity="center" android:drawable="@mipmap/ic_launcher"></item>// 화면 가운데 아이콘 지정
+</layer-list>
+3. Manifest 파일의 intent-filter를 스플레쉬 엑티비티로 옮김
+4. style.xml 에 스플레쉬할 테마 만들기
+    <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_background</item>
+    </style>
+5. Manifest의 <activity>중 스플레쉬 엑티비티에 " android:theme="@style/SplashTheme"
