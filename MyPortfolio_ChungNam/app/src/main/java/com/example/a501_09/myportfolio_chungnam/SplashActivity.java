@@ -9,17 +9,18 @@ import android.widget.Toast;
 /**
  * Created by 501-09 on 2018-03-30.
  */
-
+//첫 로딩동안 나오는 화면
 public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //앱을 동작하기 위한 준비를 위한 시간
-        try{
-            Thread.sleep(5000);
-            Toast.makeText(this, "5초 ", Toast.LENGTH_SHORT).show();
-        }catch(Exception e){;}
+        UiHiddenNaviBar uiHiddenNaviBar = new UiHiddenNaviBar(SplashActivity.this);
+//        //앱을 동작하기 위한 준비를 위한 시간
+//        try{
+//            Thread.sleep(5000);
+//            Toast.makeText(this, "5초 ", Toast.LENGTH_SHORT).show();
+//        }catch(Exception e){;}
 
         Intent intent = new Intent(SplashActivity.this,MainActivity.class);
         startActivity(intent);

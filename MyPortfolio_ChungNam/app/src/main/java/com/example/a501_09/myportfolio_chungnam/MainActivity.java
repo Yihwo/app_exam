@@ -3,6 +3,7 @@ package com.example.a501_09.myportfolio_chungnam;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -14,6 +15,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setMainWebView();
+
+        UiHiddenNaviBar uiHiddenNaviBar = new UiHiddenNaviBar(MainActivity.this);
+
+//        View decorView = getWindow().getDecorView();
+//        int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_FULLSCREEN;
+//        decorView.setSystemUiVisibility(uiOptions);
     }
     private void setMainWebView(){
         webView = (WebView)findViewById(R.id.webView);
@@ -34,6 +41,6 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
-        webView.loadUrl("http://118.46.60.101/index.php");
+        webView.loadUrl(DefaultOptionURL.DEFAULT_MAIN_PAGE_URL);
     }
 }
