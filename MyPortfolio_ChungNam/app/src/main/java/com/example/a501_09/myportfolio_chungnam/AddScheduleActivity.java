@@ -12,20 +12,19 @@ import android.widget.Toast;
  * Created by 501-09 on 2018-04-03.
  */
 
-public class AddTripActivity extends AppCompatActivity {
-
-    Toolbar toolbar_addTrip;
+public class AddScheduleActivity extends AppCompatActivity {
+    Toolbar toolbar_add_schedule;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_trip);
+        setContentView(R.layout.activity_add_schedule);
         setToolbar();
     }
     private void setToolbar(){
-        toolbar_addTrip = (Toolbar)findViewById(R.id.toolbar_addtrip);
-        toolbar_addTrip.setTitle("");
-        toolbar_addTrip.setNavigationIcon(R.mipmap.ic_keyboard_arrow_left_black_24dp);
-        setSupportActionBar(toolbar_addTrip);
+        toolbar_add_schedule = (Toolbar)findViewById(R.id.toolbar_add_schedule);
+        toolbar_add_schedule.setTitle("");
+        toolbar_add_schedule.setNavigationIcon(R.mipmap.ic_keyboard_arrow_left_black_24dp);
+        setSupportActionBar(toolbar_add_schedule);
     }
     public boolean onSupportNavigateUp(){
         onBackPressed();
@@ -38,7 +37,7 @@ public class AddTripActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem menuItem){
         switch(menuItem.getItemId()){
             case R.id.toolbar_item_check_trip:
-                Toast.makeText(this, "여행 추가", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "일정 추가", Toast.LENGTH_SHORT).show();
                 break;
         }
         return super.onOptionsItemSelected(menuItem);

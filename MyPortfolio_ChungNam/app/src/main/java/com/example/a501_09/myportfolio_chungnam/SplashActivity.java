@@ -22,7 +22,7 @@ public class SplashActivity extends AppCompatActivity {
 //            Toast.makeText(this, "5초 ", Toast.LENGTH_SHORT).show();
 //        }catch(Exception e){;}
 
-        Intent intent = new Intent(SplashActivity.this,AddTripActivity.class);
+        Intent intent = new Intent(SplashActivity.this,AddScheduleActivity.class);
         startActivity(intent);
 
         finish();
