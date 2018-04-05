@@ -258,7 +258,7 @@
         app:layout_constraintGuide_percent="0.5" />
 
     <ImageButton
-        android:id="@+id/imageButton2"
+        android:id="@+id/person_min"
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:background="@color/colorChngNam"
@@ -269,7 +269,7 @@
         app:srcCompat="@mipmap/ic_remove_black_24dp" />
 
     <ImageButton
-        android:id="@+id/imageButton3"
+        android:id="@+id/person_add"
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_marginBottom="8dp"
