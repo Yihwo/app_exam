@@ -1,0 +1,15 @@
+apply plugin: 'java-library'
+
+//add
+apply plugin:'application'
+mainClassName = "com.example.greendao.MyGenerator"
+//
+dependencies {
+    //add
+    compile "org.greenrobot:greendao-generator:3.2.2"
+    //
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+}
+
+sourceCompatibility = "1.7"
+targetCompatibility = "1.7"

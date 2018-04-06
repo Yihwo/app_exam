@@ -19,6 +19,7 @@ android {
 }
 
 dependencies {
+    compile 'org.greenrobot:greendao:3.2.2'
     compile 'com.github.alamkanak:android-week-view:1.2.6'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:26.1.0'
