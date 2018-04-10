@@ -202,7 +202,7 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/border"
         android:ems="10"
-        android:inputType="date"
+        android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/guideline3"
         app:layout_constraintEnd_toStartOf="@+id/guideline8"
         app:layout_constraintStart_toStartOf="@+id/guideline7"
@@ -218,7 +218,7 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/border"
         android:ems="10"
-        android:inputType="date"
+        android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toStartOf="@+id/guideline8"
         app:layout_constraintStart_toStartOf="@+id/guideline7"
@@ -258,7 +258,7 @@
         app:layout_constraintGuide_percent="0.5" />
 
     <ImageButton
-        android:id="@+id/person_min"
+        android:id="@+id/member_min"
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:background="@color/colorChngNam"
@@ -269,7 +269,7 @@
         app:srcCompat="@mipmap/ic_remove_black_24dp" />
 
     <ImageButton
-        android:id="@+id/person_add"
+        android:id="@+id/member_add"
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_marginBottom="8dp"
@@ -284,7 +284,7 @@
         app:srcCompat="@mipmap/ic_add_black_24dp" />
 
     <EditText
-        android:id="@+id/editText6"
+        android:id="@+id/text_Trip_member"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginBottom="8dp"
@@ -293,9 +293,9 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/border"
         android:ems="10"
-        android:hint="명"
         android:inputType="textPersonName"
         android:paddingRight="10dp"
+        android:text="1명"
         android:textAlignment="textEnd"
         app:layout_constraintBottom_toTopOf="@+id/guideline5"
         app:layout_constraintEnd_toStartOf="@+id/guideline10"

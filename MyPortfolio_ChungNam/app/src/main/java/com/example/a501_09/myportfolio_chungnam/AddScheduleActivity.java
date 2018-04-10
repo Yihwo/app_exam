@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.example.a501_09.myportfolio_chungnam.util.Util;
+
 /**
  * Created by 501-09 on 2018-04-03.
  */
@@ -25,6 +27,7 @@ public class AddScheduleActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_schedule);
+
         btn_time = (Button)findViewById(R.id.btn_time);
         setToolbar();
         timeSetListener = new TimeSetListener();

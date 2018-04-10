@@ -24,21 +24,24 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         UiHiddenNaviBar uiHiddenNaviBar = new UiHiddenNaviBar(SplashActivity.this);
-        daoSession= ((AppController)getApplication()).getDaoSession();
-        //데이터 저장
-        daoSession.insert(new Place(6L,new Date(),new Date(),"청남대",
-                "대통령의별장","img1.jpg","000-0000-0000"));
-        daoSession.insert(new Place(7L,new Date(),new Date(),"청남대",
-                "대통령의집","img2.jpg","000-0000-0000"));
 
-//        daoSession.getPlaceDao().queryBuilder().buildDelete();
-        //데이터 읽어오기
-        List<Place> list = daoSession.getPlaceDao().queryBuilder().list();
 
-        for(int i=0;i<list.size();i++){
-            Place temp = list.get(i);
-            Log.d("portfolio_code",temp.getName());
-        }
+//////////////////////////////////////////date translate////////////////////////////
+//        daoSession= ((AppController)getApplication()).getDaoSession();
+//        //데이터 저장
+//        daoSession.insert(new Place(6L,new Date(),new Date(),"청남대",
+//                "대통령의별장","img1.jpg","000-0000-0000"));
+//        daoSession.insert(new Place(7L,new Date(),new Date(),"청남대",
+//                "대통령의집","img2.jpg","000-0000-0000"));
+//
+////        daoSession.getPlaceDao().queryBuilder().buildDelete();
+//        //데이터 읽어오기
+//        List<Place> list = daoSession.getPlaceDao().queryBuilder().list();
+//
+//        for(int i=0;i<list.size();i++){
+//            Place temp = list.get(i);
+//            Log.d("portfolio_code",temp.getName());
+//        }
 
 //        //앱을 동작하기 위한 준비를 위한 시간
 //        try{
@@ -46,7 +49,7 @@ public class SplashActivity extends AppCompatActivity {
 //            Toast.makeText(this, "5초 ", Toast.LENGTH_SHORT).show();
 //        }catch(Exception e){;}
 
-        Intent intent = new Intent(SplashActivity.this,AddScheduleActivity.class);
+        Intent intent = new Intent(SplashActivity.this,AddTripActivity.class);
         startActivity(intent);
 
         finish();
