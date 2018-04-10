@@ -157,7 +157,7 @@ public class AddTripActivity extends AppCompatActivity {
             start_year = i;
             start_month = i1+1;
             start_day = i2;
-            date_Trip_start.setText(i+" 년 "+(i1+1)+" 월 "+i2+" 일");
+            date_Trip_start.setText(start_year+" 년 "+start_month+" 월 "+start_day+" 일");
         }
     };
     private DatePickerDialog.OnDateSetListener dateSetListener2 = new DatePickerDialog.OnDateSetListener() {
@@ -167,7 +167,7 @@ public class AddTripActivity extends AppCompatActivity {
             end_year = i;
             end_month = i1+1;
             end_day = i2;
-            date_Trip_end.setText(i+" 년 "+(i1+1)+" 월 "+i2+" 일");
+            date_Trip_end.setText(end_year+" 년 "+end_month+" 월 "+end_day+" 일");
         }
     };
 }
