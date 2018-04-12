@@ -10,6 +10,7 @@ import java.util.Date;
 
 public class Util {
     public static Date getNowDateTime(){
-        return Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
+//        return Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
+        return new Date();
     }
 }

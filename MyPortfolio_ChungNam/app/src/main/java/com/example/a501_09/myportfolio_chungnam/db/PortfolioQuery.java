@@ -126,21 +126,22 @@ public class PortfolioQuery {
         List<Schedule> temp_schedule_list = daoSession.getScheduleDao().queryBuilder().list();
         List<Trip> temp_trip_list = daoSession.getTripDao().queryBuilder().list();
 
-        //    temp_place_list = daoSession.getPlaceDao().queryBuilder().where(PlaceDao.Properties.Created_at.eq(1)).list();
+        if(placeList.size() == 0 && schedulesList.size() == 0 && tripList.size() == 0) {
+            for (int i = 0; i < temp_place_list.size(); i++) {
+                placeList.add(temp_place_list.get(i));
+            }
 
-        for (int i = 0; i < temp_place_list.size(); i++) {
-            placeList.add(temp_place_list.get(i));
-        }
+            for (int i = 0; i < temp_schedule_list.size(); i++) {
+                schedulesList.add(temp_schedule_list.get(i));
+            }
 
-        for (int i = 0; i < temp_schedule_list.size(); i++) {
-            schedulesList.add(temp_schedule_list.get(i));
-        }
-
-        for (int i = 0; i < temp_trip_list.size(); i++) {
-            tripList.add(temp_trip_list.get(i));
+            for (int i = 0; i < temp_trip_list.size(); i++) {
+                tripList.add(temp_trip_list.get(i));
+            }
         }
     }
     public static void insertSchedule(DaoSession daoSession,
+                                      ArrayList<Schedule> schedulesList,
                                       String place_name, Date elapsed_time,
                                       long spend_money, Date visit_time,
                                       long trip_id, long place_id) {
@@ -155,10 +156,12 @@ public class PortfolioQuery {
         temp_schedule.setUpdate_at(Util.getNowDateTime());
         temp_schedule.setCreated_at(Util.getNowDateTime());
 
+        schedulesList.add(temp_schedule);
         daoSession.insert(temp_schedule);
     }
 
     public static void insertTrip(DaoSession daoSession,
+                                  ArrayList<Trip> tripList,
                                   String title, Date start_date, Date end_date,
                                   int number_of_member, long total_money) {
         Trip temp_trip = new Trip();
@@ -171,10 +174,12 @@ public class PortfolioQuery {
         temp_trip.setUpdate_at(Util.getNowDateTime());
         temp_trip.setCreated_at(Util.getNowDateTime());
 
+        tripList.add(temp_trip);
         daoSession.insert(temp_trip);
     }
 
     public static void insertPlace(DaoSession daoSession,
+                                   ArrayList<Place> placeList,
                                    String name, String desc, String img_name) {
         Place temp_place = new Place();
 
@@ -184,6 +189,7 @@ public class PortfolioQuery {
         temp_place.setUpdate_at(Util.getNowDateTime());
         temp_place.setCreated_at(Util.getNowDateTime());
 
+        placeList.add(temp_place);
         daoSession.insert(temp_place);
     }
 

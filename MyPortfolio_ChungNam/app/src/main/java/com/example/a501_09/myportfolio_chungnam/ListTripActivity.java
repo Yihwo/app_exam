@@ -1,12 +1,21 @@
 package com.example.a501_09.myportfolio_chungnam;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.Toast;
+
+import com.example.a501_09.myportfolio_chungnam.datalist.TripList;
+import com.example.a501_09.myportfolio_chungnam.db.Trip;
+
+import java.util.ArrayList;
 
 /**
  * Created by 501-09 on 2018-04-03.
@@ -14,11 +23,31 @@ import android.widget.Toast;
 
 public class ListTripActivity extends AppCompatActivity {
     Toolbar toolbar_List_trip;
+    ListView listView_List_trip;
+    ArrayList<Trip> arrayList_trip;
+    TripListAdapter tripListAdapter;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_trip);
         setToolbar();
+        setComponents();
+        setData();
+        setTripList();
+    }
+    private void setTripList(){
+        tripListAdapter = new TripListAdapter(ListTripActivity.this,arrayList_trip,R.layout.item_trip_list);
+        listView_List_trip.setAdapter(tripListAdapter);
+//        listView_List_trip.setOnItemClickListener(new ListItemClickListener());
+    }
+    private void setData(){
+        arrayList_trip = TripList.getInstance();
+    }
+    private void setComponents(){
+        listView_List_trip = (ListView)findViewById(R.id.listView_List_trip);
+
+
     }
     private void setToolbar(){
         toolbar_List_trip= (Toolbar)findViewById(R.id.toolbar_List_trip);
@@ -38,8 +67,17 @@ public class ListTripActivity extends AppCompatActivity {
         switch(menuItem.getItemId()){
             case R.id.toolbar_item_add_trip:
                 Toast.makeText(this, "여행 목록", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(ListTripActivity.this,AddTripActivity.class);
+                startActivity(intent);
                 break;
         }
         return super.onOptionsItemSelected(menuItem);
     }
+//    class ListItemClickListener implements AdapterView.OnItemClickListener{
+//        @Override
+//        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//            Intent intent = new Intent(ListTripActivity.this, ScheduleTripActivity.class);
+//            startActivity(intent);
+//        }
+//    }
 }

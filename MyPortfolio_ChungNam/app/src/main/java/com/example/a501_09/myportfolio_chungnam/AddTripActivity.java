@@ -1,6 +1,7 @@
 package com.example.a501_09.myportfolio_chungnam;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -16,10 +17,12 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.example.a501_09.myportfolio_chungnam.datalist.TripList;
 import com.example.a501_09.myportfolio_chungnam.db.DaoSession;
 import com.example.a501_09.myportfolio_chungnam.db.PortfolioQuery;
 import com.example.a501_09.myportfolio_chungnam.db.Trip;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -30,6 +33,7 @@ import java.util.List;
 public class AddTripActivity extends AppCompatActivity {
 
     DaoSession daoSession;
+    ArrayList<Trip> arrayList_Trip;
 
     EditText text_Trip_title;
     EditText date_Trip_start;
@@ -48,6 +52,7 @@ public class AddTripActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_trip);
         daoSession = ((AppController) getApplication()).getDaoSession();
+        arrayList_Trip= TripList.getInstance();
 
         setToolbar();
         setComponents();
@@ -96,14 +101,18 @@ public class AddTripActivity extends AppCompatActivity {
             case R.id.toolbar_item_check_trip:
                 Toast.makeText(this, "여행 추가", Toast.LENGTH_SHORT).show();
                 //여행 추가 01
+
                 PortfolioQuery.insertTrip(
                         daoSession,
+                        arrayList_Trip,
                         text_Trip_title.getText().toString(),
                         new Date(start_year, start_month, start_day),
                         new Date(end_year, end_month, end_day),
                         number_of_member,
                         Long.valueOf(text_Trip_budget.getText().toString())
                 );
+                Intent intent = new Intent(AddTripActivity.this,ListTripActivity.class);
+                startActivity(intent);
                 List<Trip> test = daoSession.getTripDao().queryBuilder().list();
                 for (int i = 0; i < test.size(); i++) {
                     String msg = "trip - " +
