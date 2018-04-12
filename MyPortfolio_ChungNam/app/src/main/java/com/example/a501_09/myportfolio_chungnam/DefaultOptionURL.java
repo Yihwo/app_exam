@@ -5,5 +5,5 @@ package com.example.a501_09.myportfolio_chungnam;
  */
 //메인 페이지를 저장하고 있는 함수
 public class DefaultOptionURL {
-    public final static String DEFAULT_MAIN_PAGE_URL = "http://everystreet.dothome.co.kr";
+    public final static String DEFAULT_MAIN_PAGE_URL = "http://everystreet.dothome.co.kr/web/chungnam/index.html";
 }

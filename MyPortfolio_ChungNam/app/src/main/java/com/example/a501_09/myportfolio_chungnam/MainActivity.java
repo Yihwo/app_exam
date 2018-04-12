@@ -32,8 +32,8 @@ public class MainActivity extends AppCompatActivity {
         webView.setWebViewClient(new WebViewClient(){
             public boolean shouldOverrideUrlLoading(WebView view,String url){
                 //연결된 홈페이지 내부에서 특정한 url을 선택 했을때 activity를 이동함
-                if(url.startsWith("app://")){
-                    Intent intent = new Intent(MainActivity.this,TestActivity.class);
+                if(url.startsWith("app://place1")){
+                    Intent intent = new Intent(MainActivity.this,ListTripActivity.class);
                     startActivity(intent);
                 }else{
                     view.loadUrl(url);
