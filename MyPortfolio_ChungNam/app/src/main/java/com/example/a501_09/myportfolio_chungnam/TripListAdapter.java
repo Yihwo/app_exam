@@ -61,6 +61,7 @@ public class TripListAdapter extends BaseAdapter {
                 arrayList.get(i).getEnd_day().getMonth()+"/"+
                 arrayList.get(i).getEnd_day().getDate();
         txt_item_trip_days.setText(start_day+"~"+end_day);
+        txt_item_trip_title.setText(arrayList.get(i).getTitle());
         return view;
     }
 }

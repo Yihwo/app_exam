@@ -40,6 +40,15 @@ public class ListTripActivity extends AppCompatActivity {
         tripListAdapter = new TripListAdapter(ListTripActivity.this,arrayList_trip,R.layout.item_trip_list);
         listView_List_trip.setAdapter(tripListAdapter);
 //        listView_List_trip.setOnItemClickListener(new ListItemClickListener());
+
+        listView_List_trip.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(ListTripActivity.this,ScheduleTripActivity.class);
+                intent.putExtra("SELECTED_TRIP",i);
+                startActivityForResult(intent,1);
+            }
+        });
     }
     private void setData(){
         arrayList_trip = TripList.getInstance();
@@ -73,11 +82,4 @@ public class ListTripActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(menuItem);
     }
-//    class ListItemClickListener implements AdapterView.OnItemClickListener{
-//        @Override
-//        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//            Intent intent = new Intent(ListTripActivity.this, ScheduleTripActivity.class);
-//            startActivity(intent);
-//        }
-//    }
 }

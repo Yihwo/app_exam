@@ -104,7 +104,7 @@
         app:layout_constraintGuide_percent="0.20833333" />
 
     <TextView
-        android:id="@+id/txt_Schedule_name"
+        android:id="@+id/txt_sche_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -182,7 +182,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline17" />
 
     <TextView
-        android:id="@+id/txt_sche_people"
+        android:id="@+id/txt_sche_member"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
