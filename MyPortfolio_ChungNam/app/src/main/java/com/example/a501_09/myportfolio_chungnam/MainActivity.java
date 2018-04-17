@@ -8,6 +8,8 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.example.a501_09.myportfolio_chungnam.util.Util;
+
 public class MainActivity extends AppCompatActivity {
     WebView webView;
     @Override
@@ -33,9 +35,32 @@ public class MainActivity extends AppCompatActivity {
             public boolean shouldOverrideUrlLoading(WebView view,String url){
                 //연결된 홈페이지 내부에서 특정한 url을 선택 했을때 activity를 이동함
                 if(url.startsWith("app://place1")){
+                    Util.setPlaceIndex(MainActivity.this,0);
+                    Util.setPlaceTitle(MainActivity.this,"악휘봉");
                     Intent intent = new Intent(MainActivity.this,ListTripActivity.class);
                     startActivity(intent);
-                }else{
+                }else if(url.startsWith("app://place2")){
+                    Util.setPlaceIndex(MainActivity.this,1);
+                    Util.setPlaceTitle(MainActivity.this,"희양봉");
+                    Intent intent = new Intent(MainActivity.this,ListTripActivity.class);
+                    startActivity(intent);
+                }else if(url.startsWith("app://place3")){
+                    Util.setPlaceIndex(MainActivity.this,2);
+                    Util.setPlaceTitle(MainActivity.this,"조항산");
+                    Intent intent = new Intent(MainActivity.this,ListTripActivity.class);
+                    startActivity(intent);
+                }else if(url.startsWith("app://place4")){
+                    Util.setPlaceIndex(MainActivity.this,3);
+                    Util.setPlaceTitle(MainActivity.this,"쌍곡 계곡");
+                    Intent intent = new Intent(MainActivity.this,ListTripActivity.class);
+                    startActivity(intent);
+                }else if(url.startsWith("app://place5")){
+                    Util.setPlaceIndex(MainActivity.this,4);
+                    Util.setPlaceTitle(MainActivity.this,"선유구곡");
+                    Intent intent = new Intent(MainActivity.this,ListTripActivity.class);
+                    startActivity(intent);
+                }
+                else{
                     view.loadUrl(url);
                 }
                 return true;
