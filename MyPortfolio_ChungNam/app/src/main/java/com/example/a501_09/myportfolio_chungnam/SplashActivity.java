@@ -67,13 +67,13 @@ public class SplashActivity extends AppCompatActivity {
 //            Thread.sleep(5000);
 //            Toast.makeText(this, "5초 ", Toast.LENGTH_SHORT).show();
 //        }catch(Exception e){;}
-
+        setPlaceData();
         Intent intent = new Intent(SplashActivity.this,MainActivity.class);
         startActivity(intent);
 
         finish();
     }
-    private void seetPlaceData(){
+    private void setPlaceData(){
         if(arrayList_place.isEmpty()){
             PortfolioQuery.insertPlace(daoSession,arrayList_place,"악휘봉",
                     "악휘봉은 괴산군 연풍면과 칠성면 경계에 위치한 해발 845m의 산으로 백두대간의 본 줄기에서 한발짝 벗어난 절경의 산이다. ",

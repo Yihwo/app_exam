@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -26,6 +27,8 @@ import com.example.a501_09.myportfolio_chungnam.db.Trip;
 import com.example.a501_09.myportfolio_chungnam.util.Util;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  * Created by 501-09 on 2018-04-03.
@@ -42,18 +45,20 @@ public class AddScheduleActivity extends AppCompatActivity {
     TimeSetListener timeSetListener;
     int sche_hour, sche_minute, play_time = 30;
     ImageButton time_min, time_add;
+    ImageView imageView_place;
 
     int play_hour=0,play_minute=0;
+    int hour_visited,minute_visited;
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_schedule);
-
+        setData();
         setComponent();
         setToolbar();
-        setData();
+
     }
     private void setData(){
         daoSession = ((AppController) getApplication()).getDaoSession();
@@ -63,6 +68,13 @@ public class AddScheduleActivity extends AppCompatActivity {
 
     private void setComponent() {
         txt_place_name = (TextView)findViewById(R.id.txt_place_name);
+        imageView_place = (ImageView)findViewById(R.id.imageView_place);
+        GregorianCalendar calendar = new GregorianCalendar();
+        hour_visited = calendar.get(calendar.HOUR_OF_DAY);
+        minute_visited = calendar.get(calendar.MINUTE);
+
+        sche_hour = hour_visited;
+        sche_minute = minute_visited;
 
         time_min = (ImageButton) findViewById(R.id.time_min);
         time_add = (ImageButton) findViewById(R.id.time_add);
@@ -83,11 +95,15 @@ public class AddScheduleActivity extends AppCompatActivity {
 
         txt_time.setOnClickListener(new CompoOncliclistener());
         txt_place_name.setText(Util.getPlaceTitle(AddScheduleActivity.this));
-//        for(int i=0;i < arrayList_Place.size();i++){
-//            if(arrayList_Place.get(i).getId()==Util.getPlaceIndex(AddScheduleActivity.this)){
-//                arrayList_Place.get(i).getName();
-//            }
-//        }
+
+        for(int i=0;i < arrayList_Place.size();i++){
+            if(arrayList_Place.get(i).getName().equals(Util.getPlaceTitle(AddScheduleActivity.this))){
+                String img_name;
+                img_name = arrayList_Place.get(i).getImg_name();
+                int img_id = getResources().getIdentifier("@drawable/"+img_name,"drawable",this.getPackageName());
+                imageView_place.setImageResource(img_id);
+            }
+        }
     }
 
     private void setToolbar() {
@@ -135,6 +151,20 @@ public class AddScheduleActivity extends AppCompatActivity {
         }else {
             result = play_hour + " 시간" + play_minute + " 분";
         }
+
+        return result;
+    }
+    private Date setTimeNowToVisited(){
+        Date result = new Date();
+        hour_visited = sche_hour + play_hour;
+        minute_visited = sche_minute + play_minute;
+
+        if(minute_visited/60 == 1){
+            hour_visited = hour_visited + 1;
+            minute_visited = minute_visited - 60;
+        }
+        result.setHours(hour_visited);
+        result.setMinutes(minute_visited);
         return result;
     }
     class CompoOncliclistener implements View.OnClickListener {
@@ -143,16 +173,8 @@ public class AddScheduleActivity extends AppCompatActivity {
             switch (view.getId()) {
                 case R.id.time_add:
                     play_time = play_time + 30;
-//                    play_hour = play_time/60;
-//                    play_minute = play_time % 60;
-//                    if(play_hour == 0){
-//                        editText_playTime.setText(play_minute + " 분");
-//                    }else if(play_minute == 0){
-//                        editText_playTime.setText(play_hour + " 시간");
-//                    }else {
-//                        editText_playTime.setText(play_hour + " 시간" + play_minute + " 분");
-//                    }
                     editText_playTime.setText(convertTime(play_time));
+                    Toast.makeText(AddScheduleActivity.this, setTimeNowToVisited().getHours()+" : "+setTimeNowToVisited().getMinutes(), Toast.LENGTH_SHORT).show();
                     break;
                     //int tcnt=0;
                     //while(play_time == 0){
@@ -168,20 +190,12 @@ public class AddScheduleActivity extends AppCompatActivity {
                         Toast.makeText(AddScheduleActivity.this, "감소가 불가능 합니다.", Toast.LENGTH_SHORT).show();
                     } else {
                         play_time = play_time - 30;
-//                        play_hour = play_time/60;
-//                        play_minute = play_time % 60;
-//                        if(play_hour == 0){
-//                            editText_playTime.setText(play_minute + " 분");
-//                        }else if(play_minute == 0){
-//                            editText_playTime.setText(play_hour + " 시간");
-//                        }else {
-//                            editText_playTime.setText(play_hour + " 시간" + play_minute + " 분");
-//                        }
                         editText_playTime.setText(convertTime(play_time));
+                        Toast.makeText(AddScheduleActivity.this, setTimeNowToVisited().getHours()+" : "+setTimeNowToVisited().getMinutes(), Toast.LENGTH_SHORT).show();
                     }
                     break;
                 case R.id.txt_time:
-                    new TimePickerDialog(AddScheduleActivity.this, timeSetListener, sche_hour, sche_minute, false).show();
+                    new TimePickerDialog(AddScheduleActivity.this, timeSetListener, sche_hour, sche_minute, true).show();
                     break;
             }
         }

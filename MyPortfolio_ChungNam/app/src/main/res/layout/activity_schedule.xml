@@ -7,7 +7,7 @@
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar_Schedule"
-        android:layout_width="384dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/colorChngNam"
         android:minHeight="?attr/actionBarSize"
@@ -23,6 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -38,7 +39,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.10229277" />
+        app:layout_constraintGuide_percent="0.1" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline14"
@@ -69,18 +70,11 @@
         app:layout_constraintGuide_percent="0.16" />
 
     <android.support.constraint.Guideline
-        android:id="@+id/guideline18"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="550dp" />
-
-    <android.support.constraint.Guideline
         android:id="@+id/guideline19"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.052083332" />
+        app:layout_constraintGuide_percent="0.05" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline20"
@@ -101,7 +95,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.20833333" />
+        app:layout_constraintGuide_percent="0.21" />
 
     <TextView
         android:id="@+id/txt_sche_title"
@@ -112,7 +106,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="일정이름"
-        android:textAlignment="viewStart"
+
         android:textColor="@android:color/background_dark"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline17"
@@ -217,7 +211,6 @@
         android:id="@+id/weekView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
         app:columnGap="8dp"
@@ -229,7 +222,7 @@
         app:headerRowBackgroundColor="#ffefefef"
         app:headerRowPadding="12dp"
         app:hourHeight="60dp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline18"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline14"

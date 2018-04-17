@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent);
                 }else if(url.startsWith("app://place2")){
                     Util.setPlaceIndex(MainActivity.this,1);
-                    Util.setPlaceTitle(MainActivity.this,"희양봉");
+                    Util.setPlaceTitle(MainActivity.this,"희양산");
                     Intent intent = new Intent(MainActivity.this,ListTripActivity.class);
                     startActivity(intent);
                 }else if(url.startsWith("app://place3")){
