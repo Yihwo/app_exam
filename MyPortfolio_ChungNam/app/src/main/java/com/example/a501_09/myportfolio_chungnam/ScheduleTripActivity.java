@@ -63,22 +63,34 @@ public class ScheduleTripActivity extends AppCompatActivity implements WeekView.
         weekView.setEventLongPressListener(new WeekView.EventLongPressListener() {
             @Override
             public void onEventLongPress(WeekViewEvent event, RectF eventRect) {
-                String weekview_name = event.getName();
-                int i;
-                for (i=0;i<=arrayList_schedule.size();i++){
-                    if(arrayList_schedule.get(i).getPlace_name().equals(weekview_name)){
-                        AlertDialog.Builder alert=new AlertDialog.Builder(weekView.getContext());
-                        alert.setTitle("확인");
-                        alert.setMessage("삭제 하시겠습니까?");
-                        alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                PortfolioQuery.deleteSchduleById(daoSession,arrayList_schedule.get(i).getId());
-                            }
-                        });
 
+                final String weekview_name = event.getName();
+
+                AlertDialog.Builder alert=new AlertDialog.Builder(weekView.getContext());
+                alert.setTitle("확인");
+                alert.setMessage("삭제 하시겠습니까?");
+                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        int j;
+                        for (j=0;j<arrayList_schedule.size();j++){
+                            if(arrayList_schedule.get(j).getPlace_name().equals(weekview_name)){
+                                PortfolioQuery.deleteSchduleById(daoSession,arrayList_schedule.get(j).getId());
+                                weekView.notifyDatasetChanged();
+                            }
+                        }
                     }
-                }
+                });
+                alert.setNegativeButton("Cancle", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+                alert.show();
+
+
+
                 //PortfolioQuery.deleteSchduleById();
             }
         });
