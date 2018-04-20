@@ -5,6 +5,10 @@ import org.greenrobot.greendao.query.DeleteQuery;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import com.example.a501_09.myportfolio_chungnam.datalist.PlaceList;
+import com.example.a501_09.myportfolio_chungnam.datalist.ScheduleList;
+import com.example.a501_09.myportfolio_chungnam.datalist.TripList;
 import com.example.a501_09.myportfolio_chungnam.util.Util;
 
 /**
@@ -191,6 +195,58 @@ public class PortfolioQuery {
 
         placeList.add(temp_place);
         daoSession.insert(temp_place);
+    }
+
+    public static void deletePlaceDataById(DaoSession daoSession,
+                                           long id) {
+        ArrayList<Place> placeList = PlaceList.getInstance();
+        final DeleteQuery<Place> deletePlaceQuery
+                = daoSession.queryBuilder(Place.class)
+                .where(PlaceDao.Properties.Id.eq(id))
+                .buildDelete();
+        deletePlaceQuery.executeDeleteWithoutDetachingEntities();
+        daoSession.clear();
+
+        for(int i = 0; i < placeList.size(); i++) {
+            if(placeList.get(i).getId().equals(id)) {
+                placeList.remove(i);
+                break;
+            }
+        }
+    }
+
+    public static void deleteSchduleById(DaoSession daoSession,
+                                         long id) {
+        ArrayList<Schedule> scheduleList = ScheduleList.getInstance();
+        final DeleteQuery<Schedule> deleteScheduleQuery
+                = daoSession.queryBuilder(Schedule.class)
+                .where(ScheduleDao.Properties.Id.eq(id))
+                .buildDelete();
+        deleteScheduleQuery.executeDeleteWithoutDetachingEntities();
+        daoSession.clear();
+
+        for(int i = 0; i < scheduleList.size(); i++) {
+            if(scheduleList.get(i).getId().equals(id)) {
+                scheduleList.remove(i);
+                break;
+            }
+        }
+    }
+
+    public static void deleteTripDataById(DaoSession daoSession, long id) {
+        ArrayList<Trip> tripList = TripList.getInstance();
+        final DeleteQuery<Trip> deleteTripQuery = daoSession.queryBuilder(Trip.class)
+                .where(TripDao.Properties.Id.eq(id))
+                .buildDelete();
+        deleteTripQuery.executeDeleteWithoutDetachingEntities();
+        daoSession.clear();
+
+        for(int i = 0; i < tripList.size(); i++) {
+            if(tripList.get(i).getId().equals(id)) {
+                tripList.remove(i);
+                break;
+            }
+        }
     }
 
     public static void deletePlaceData(DaoSession daoSession) {

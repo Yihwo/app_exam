@@ -5,4 +5,12 @@
     <color name="colorAccent">#FF4081</color>
     <color name="colorSplashBackground">#ffffff</color>
     <color name="colorChngNam">#ffd800</color>
+    <color name="colorSchedule1">#e51937</color>
+    <color name="colorSchedule2">#6dcff6</color>
+    <color name="colorSchedule3">#ff9bb3</color>
+    <color name="colorSchedule4">#6a8dbf</color>
+    <color name="colorSchedule5">#fff799</color>
+    <color name="colorSchedule6">#00a651</color>
+    <color name="colorSchedule7">#a1a1a1</color>
+    <color name="colorSchedule8">#662d91</color>
 </resources>

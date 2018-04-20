@@ -1,5 +1,7 @@
 package com.example.a501_09.myportfolio_chungnam;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,6 +15,8 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.a501_09.myportfolio_chungnam.datalist.TripList;
+import com.example.a501_09.myportfolio_chungnam.db.DaoSession;
+import com.example.a501_09.myportfolio_chungnam.db.PortfolioQuery;
 import com.example.a501_09.myportfolio_chungnam.db.Trip;
 
 import java.util.ArrayList;
@@ -26,6 +30,7 @@ public class ListTripActivity extends AppCompatActivity {
     ListView listView_List_trip;
     ArrayList<Trip> arrayList_trip;
     TripListAdapter tripListAdapter;
+    DaoSession daoSession;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -49,8 +54,34 @@ public class ListTripActivity extends AppCompatActivity {
                 startActivityForResult(intent,1);
             }
         });
+        listView_List_trip.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                final int selected_list_item=i;
+                AlertDialog.Builder alert=new AlertDialog.Builder(view.getContext());
+                alert.setTitle("확인");
+                alert.setMessage("삭제 하시겠습니까?");
+                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        PortfolioQuery.deleteTripDataById(daoSession, arrayList_trip.get(selected_list_item).getId());
+                        tripListAdapter.notifyDataSetChanged();
+                    }
+                });
+                alert.setNegativeButton("Cancle", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+                alert.show();
+
+                return true;
+            }
+        });
     }
     private void setData(){
+        daoSession = ((AppController) getApplication()).getDaoSession();
         arrayList_trip = TripList.getInstance();
     }
     private void setComponents(){
@@ -82,4 +113,5 @@ public class ListTripActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(menuItem);
     }
+
 }

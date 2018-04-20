@@ -24,6 +24,7 @@ import com.example.a501_09.myportfolio_chungnam.db.Trip;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 /**
@@ -46,6 +47,7 @@ public class AddTripActivity extends AppCompatActivity {
     int start_year, start_month, start_day;
     int end_year, end_month, end_day;
     int number_of_member = 1;
+    int trip_year,trip_month,trip_day;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -59,6 +61,11 @@ public class AddTripActivity extends AppCompatActivity {
     }
 
     private void setComponents() {
+        GregorianCalendar calendar = new GregorianCalendar();
+        trip_year = calendar.get(calendar.YEAR);
+        trip_month = calendar.get(calendar.MONTH);
+        trip_day = calendar.get(calendar.DAY_OF_MONTH);
+
         text_Trip_budget = (EditText) findViewById(R.id.text_Trip_budget);
         text_Trip_member = (EditText) findViewById(R.id.text_Trip_member);
         text_Trip_title = (EditText) findViewById(R.id.text_Trip_title);
@@ -138,10 +145,10 @@ public class AddTripActivity extends AppCompatActivity {
         public void onClick(View view) {
             switch (view.getId()) {
                 case R.id.date_Trip_start:
-                    new DatePickerDialog(AddTripActivity.this, dateSetListener1, 2018, 4, 10).show();
+                    new DatePickerDialog(AddTripActivity.this, dateSetListener1, trip_year, trip_month, trip_day).show();
                     break;
                 case R.id.date_Trip_end:
-                    new DatePickerDialog(AddTripActivity.this, dateSetListener2, 2018, 4, 10).show();
+                    new DatePickerDialog(AddTripActivity.this, dateSetListener2, trip_year, trip_month, trip_day).show();
                     break;
                 case R.id.member_add:
                     number_of_member++;

@@ -1,6 +1,8 @@
 package com.example.a501_09.myportfolio_chungnam;
 
+import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -22,6 +25,7 @@ import com.example.a501_09.myportfolio_chungnam.datalist.ScheduleList;
 import com.example.a501_09.myportfolio_chungnam.datalist.TripList;
 import com.example.a501_09.myportfolio_chungnam.db.DaoSession;
 import com.example.a501_09.myportfolio_chungnam.db.Place;
+import com.example.a501_09.myportfolio_chungnam.db.PortfolioQuery;
 import com.example.a501_09.myportfolio_chungnam.db.Schedule;
 import com.example.a501_09.myportfolio_chungnam.db.Trip;
 import com.example.a501_09.myportfolio_chungnam.util.Util;
@@ -38,17 +42,22 @@ public class AddScheduleActivity extends AppCompatActivity {
     DaoSession daoSession;
     ArrayList<Place> arrayList_Place;
     ArrayList<Schedule> arrayList_Schedule;
-    TextView txt_place_name;
+    ArrayList<Trip> arrayList_Trip;
+    TextView txt_place_name,textView_budgetLeft;
     Toolbar toolbar_add_schedule;
-    EditText txt_time;
-    EditText editText_playTime;
+    EditText txt_time,txt_visitDate;
+    EditText editText_playTime,editText_budget;
     TimeSetListener timeSetListener;
+    DateSetListener dateSetListener;
     int sche_hour, sche_minute, play_time = 30;
     ImageButton time_min, time_add;
     ImageView imageView_place;
 
     int play_hour=0,play_minute=0;
     int hour_visited,minute_visited;
+    int place_index,trip_index;
+    int elapse_day,elapse_min,elapse_hour,elapse_month,elapse_year,visit_day,visit_month,visit_year;
+    int trip_year,trip_month,trip_day;
 
 
     @Override
@@ -64,14 +73,26 @@ public class AddScheduleActivity extends AppCompatActivity {
         daoSession = ((AppController) getApplication()).getDaoSession();
         arrayList_Schedule = ScheduleList.getInstance();
         arrayList_Place = PlaceList.getInstance();
+        arrayList_Trip = TripList.getInstance();
+        Intent intent = getIntent();
+        trip_index = intent.getIntExtra("SELECTED_TRIP",-1);
+        place_index = Util.getPlaceIndex(AddScheduleActivity.this);
     }
 
     private void setComponent() {
+        GregorianCalendar calendar = new GregorianCalendar();
+        trip_year = calendar.get(calendar.YEAR);
+        trip_month = calendar.get(calendar.MONTH);
+        trip_day = calendar.get(calendar.DAY_OF_MONTH);
+
         txt_place_name = (TextView)findViewById(R.id.txt_place_name);
         imageView_place = (ImageView)findViewById(R.id.imageView_place);
-        GregorianCalendar calendar = new GregorianCalendar();
+
         hour_visited = calendar.get(calendar.HOUR_OF_DAY);
         minute_visited = calendar.get(calendar.MINUTE);
+
+        editText_budget = (EditText)findViewById(R.id.editText_budget);
+        textView_budgetLeft = (TextView)findViewById(R.id.textView_budgetLeft);
 
         sche_hour = hour_visited;
         sche_minute = minute_visited;
@@ -80,8 +101,10 @@ public class AddScheduleActivity extends AppCompatActivity {
         time_add = (ImageButton) findViewById(R.id.time_add);
 
         txt_time = (EditText) findViewById(R.id.txt_time);
+        txt_visitDate = (EditText)findViewById(R.id.txt_visitDate);
 
         timeSetListener = new TimeSetListener();
+        dateSetListener = new DateSetListener();
         editText_playTime = (EditText) findViewById(R.id.editText_playTime);
 
         txt_time.setInputType(InputType.TYPE_NULL);
@@ -89,12 +112,18 @@ public class AddScheduleActivity extends AppCompatActivity {
         editText_playTime.setInputType(InputType.TYPE_NULL);
         editText_playTime.setFocusable(false);
         editText_playTime.setText(play_time + " 분");
+        txt_visitDate.setInputType(InputType.TYPE_NULL);
+        txt_visitDate.setFocusable(false);
 
         time_add.setOnClickListener(new CompoOncliclistener());
         time_min.setOnClickListener(new CompoOncliclistener());
 
         txt_time.setOnClickListener(new CompoOncliclistener());
+        txt_visitDate.setOnClickListener(new CompoOncliclistener());
         txt_place_name.setText(Util.getPlaceTitle(AddScheduleActivity.this));
+
+        editText_budget.setOnFocusChangeListener(new BudgetMyListener());
+
 
         for(int i=0;i < arrayList_Place.size();i++){
             if(arrayList_Place.get(i).getName().equals(Util.getPlaceTitle(AddScheduleActivity.this))){
@@ -127,17 +156,64 @@ public class AddScheduleActivity extends AppCompatActivity {
         switch (menuItem.getItemId()) {
             case R.id.toolbar_item_check_trip:
                 Toast.makeText(this, "일정 추가", Toast.LENGTH_SHORT).show();
-                break;
+                Date ElapseDate = setTimeNowToVisited();
+                Date VisitDate = new Date();
+                elapse_min = ElapseDate.getMinutes();
+                elapse_hour = ElapseDate.getHours();
+                elapse_day = visit_day;
+                elapse_month = visit_month;
+                elapse_year = visit_year;
+//                elapse_day = arrayList_Trip.get(trip_index).getStart_day().getDate();
+//                elapse_month = arrayList_Trip.get(trip_index).getStart_day().getMonth();
+//                elapse_year = arrayList_Trip.get(trip_index).getStart_day().getYear();
+
+                VisitDate.setHours(sche_hour);
+                VisitDate.setMinutes(sche_minute);
+                PortfolioQuery.insertSchedule(daoSession,
+                        arrayList_Schedule,
+                        txt_place_name.getText().toString(),
+                        new Date(elapse_year,elapse_month,elapse_day,elapse_hour,elapse_min),
+                        Long.parseLong(editText_budget.getText().toString()),
+                        new Date(visit_year,visit_month,visit_day,VisitDate.getHours(),VisitDate.getMinutes()),
+                        trip_index,
+                        place_index
+                );
+                PortfolioQuery.logSchedule("mySchedule",arrayList_Schedule);
+
+                Intent intent = new Intent(AddScheduleActivity.this,ScheduleTripActivity.class);
+                intent.putExtra("SELECTED_TRIP",trip_index);
+                startActivity(intent);
+                finish();
+                return  true;
         }
         return super.onOptionsItemSelected(menuItem);
     }
-
+    class BudgetMyListener implements View.OnFocusChangeListener{
+        @Override
+        public void onFocusChange(View view, boolean b) {
+//            Toast.makeText(AddScheduleActivity.this,arrayList_Trip.get(trip_index).getTotal_money()+"원", Toast.LENGTH_SHORT).show();
+//            long budget = Long.valueOf(editText_budget.getText().toString());
+//            long result = arrayList_Trip.get(trip_index).getTotal_money();
+//            result = result-budget;
+//            textView_budgetLeft.setText(result+"원");
+        }
+    }
     class TimeSetListener implements TimePickerDialog.OnTimeSetListener {
         @Override
         public void onTimeSet(TimePicker timePicker, int i, int i1) {
             sche_hour = i;
             sche_minute = i1;
             txt_time.setText(sche_hour + "시" + " " + sche_minute + "분");
+        }
+    }
+    class DateSetListener implements DatePickerDialog.OnDateSetListener{
+        @Override
+        public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+
+            visit_day = i2;
+            visit_month = i1+1;
+            visit_year = i;
+            txt_visitDate.setText(visit_year+" 년 "+visit_month+" 월 "+visit_day+" 일");
         }
     }
     public String convertTime(int play_time){
@@ -196,6 +272,9 @@ public class AddScheduleActivity extends AppCompatActivity {
                     break;
                 case R.id.txt_time:
                     new TimePickerDialog(AddScheduleActivity.this, timeSetListener, sche_hour, sche_minute, true).show();
+                    break;
+                case R.id.txt_visitDate:
+                    new DatePickerDialog(AddScheduleActivity.this,dateSetListener,trip_year,trip_month,trip_day).show();
                     break;
             }
         }
