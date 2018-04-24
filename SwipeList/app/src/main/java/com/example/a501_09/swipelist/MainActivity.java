@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
                 // set item width
                 deleteItem.setWidth(dp2px(90));
                 // set a icon
-                deleteItem.setIcon(R.drawable.ic_launcher_background);
+                deleteItem.setIcon(R.drawable.ic_remove_black_24dp);
                 // add to menu
                 menu.addMenuItem(deleteItem);
             }
