@@ -217,11 +217,11 @@ public class ScheduleTripActivity extends AppCompatActivity implements WeekView.
                 endTime.set(Calendar.MONTH, elapse_time.getMonth()-1);
                 endTime.set(Calendar.YEAR, elapse_time.getYear());
 
-                WeekViewEvent event = new WeekViewEvent(k, schedules.get(k).getPlace_name(),
+                WeekViewEvent event = new WeekViewEvent(k, schedules.get(k).getPlace_name()+"\n금액",
                         startTime, endTime);
 
 
-
+                WeekViewEvent event2 = new WeekViewEvent();
                 event.setColor(getResources().getColor(color_arr[(k % color_arr.length)]));
                 events.add(event);
 
