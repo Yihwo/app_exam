@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -26,11 +27,13 @@ import java.util.ArrayList;
  */
 
 public class ListTripActivity extends AppCompatActivity {
+    int page_selected_count = -1;
     Toolbar toolbar_List_trip;
     ListView listView_List_trip;
     ArrayList<Trip> arrayList_trip;
     TripListAdapter tripListAdapter;
     DaoSession daoSession;
+    FloatingActionButton float_Btn;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -49,9 +52,15 @@ public class ListTripActivity extends AppCompatActivity {
         listView_List_trip.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(ListTripActivity.this,ScheduleTripActivity.class);
-                intent.putExtra("SELECTED_TRIP",i);
-                startActivityForResult(intent,1);
+                if(page_selected_count == 1){
+                    Intent intent01 = new Intent(ListTripActivity.this,AddTripActivity.class);
+                    intent01.putExtra("SELECTED_TRIP",i);
+                    startActivityForResult(intent01,1);
+                }else if(page_selected_count == -1){
+                    Intent intent = new Intent(ListTripActivity.this,ScheduleTripActivity.class);
+                    intent.putExtra("SELECTED_TRIP",i);
+                    startActivityForResult(intent,1);
+                }
             }
         });
         listView_List_trip.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -85,9 +94,15 @@ public class ListTripActivity extends AppCompatActivity {
         arrayList_trip = TripList.getInstance();
     }
     private void setComponents(){
+        float_Btn = (FloatingActionButton)findViewById(R.id.float_Btn);
         listView_List_trip = (ListView)findViewById(R.id.listView_List_trip);
-
-
+        float_Btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ListTripActivity.this,AddTripActivity.class);
+                startActivity(intent);
+            }
+        });
     }
     private void setToolbar(){
         toolbar_List_trip= (Toolbar)findViewById(R.id.toolbar_List_trip);
@@ -100,17 +115,17 @@ public class ListTripActivity extends AppCompatActivity {
         return true;
     }
     public boolean onCreateOptionsMenu(Menu menu){
-        getMenuInflater().inflate(R.menu.menu_add_trip,menu);
+        getMenuInflater().inflate(R.menu.menu_edit_trip,menu);
         return true;
     }
     public boolean onOptionsItemSelected(MenuItem menuItem){
         switch(menuItem.getItemId()){
-            case R.id.toolbar_item_add_trip:
+            case R.id.toolbar_item_edit_trip:
+                page_selected_count = 1;
                 Toast.makeText(this, "여행 목록", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(ListTripActivity.this,AddTripActivity.class);
-                startActivity(intent);
                 break;
         }
+        page_selected_count = -1;
         return super.onOptionsItemSelected(menuItem);
     }
 

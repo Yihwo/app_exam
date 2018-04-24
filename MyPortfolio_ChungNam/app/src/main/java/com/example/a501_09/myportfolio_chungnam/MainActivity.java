@@ -1,6 +1,7 @@
 package com.example.a501_09.myportfolio_chungnam;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -59,6 +60,11 @@ public class MainActivity extends AppCompatActivity {
                     Util.setPlaceTitle(MainActivity.this,"선유구곡");
                     Intent intent = new Intent(MainActivity.this,ListTripActivity.class);
                     startActivity(intent);
+                }else if(url.startsWith("tel:")){
+                    Intent dial = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                    //현재의 activity 에 대하여 startActivity 호출
+                    startActivity(dial);
+                    return true;
                 }
                 else{
                     view.loadUrl(url);

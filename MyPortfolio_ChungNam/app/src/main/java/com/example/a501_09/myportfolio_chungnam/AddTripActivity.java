@@ -23,6 +23,7 @@ import com.example.a501_09.myportfolio_chungnam.db.PortfolioQuery;
 import com.example.a501_09.myportfolio_chungnam.db.Trip;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -48,6 +49,7 @@ public class AddTripActivity extends AppCompatActivity {
     int end_year, end_month, end_day;
     int number_of_member = 1;
     int trip_year,trip_month,trip_day;
+    int trip_index;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -58,6 +60,10 @@ public class AddTripActivity extends AppCompatActivity {
 
         setToolbar();
         setComponents();
+        Intent intent = getIntent();
+        //인텐트에서 데이터를 읽음
+        trip_index = intent.getIntExtra("SELECTED_TRIP", -1);
+        Toast.makeText(this, trip_index+"번째", Toast.LENGTH_SHORT).show();
     }
 
     private void setComponents() {
@@ -106,33 +112,48 @@ public class AddTripActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case R.id.toolbar_item_check_trip:
-                Toast.makeText(this, "여행 추가", Toast.LENGTH_SHORT).show();
-                //여행 추가 01
+                Date start_Date = new Date(start_year,start_month,start_day);
+                Date end_Date = new Date(end_year,end_month,end_day);
+                if(text_Trip_title.getText().toString().equals("")) {
+                    Toast.makeText(this, "여행제목을 넣어주세요", Toast.LENGTH_SHORT).show();
+                    break;
+                }else if(date_Trip_start.getText().toString().equals("")){
+                    Toast.makeText(this, "여행시작 일자를 넣어주세요", Toast.LENGTH_SHORT).show();
+                    break;
+                }else if(date_Trip_end.getText().toString().equals("")){
+                    Toast.makeText(this, "여행종료 일자를 넣어주세요", Toast.LENGTH_SHORT).show();
+                    break;
+                }else if(text_Trip_budget.getText().toString().equals("")){
+                    Toast.makeText(this, "여행예산을 넣어주세요", Toast.LENGTH_SHORT).show();
+                    break;
+                }else {
+                    Toast.makeText(this, "여행 추가", Toast.LENGTH_SHORT).show();
+                    //여행 추가 01
 
-                PortfolioQuery.insertTrip(
-                        daoSession,
-                        arrayList_Trip,
-                        text_Trip_title.getText().toString(),
-                        new Date(start_year, start_month, start_day),
-                        new Date(end_year, end_month, end_day),
-                        number_of_member,
-                        Long.valueOf(text_Trip_budget.getText().toString())
-                );
-                Intent intent = new Intent(AddTripActivity.this,ListTripActivity.class);
-                startActivity(intent);
-                List<Trip> test = daoSession.getTripDao().queryBuilder().list();
-                for (int i = 0; i < test.size(); i++) {
-                    String msg = "trip - " +
-                            "id : " + test.get(i).getId() + " / " +
-                            "title : " + test.get(i).getTitle() + " / " +
-                            "start_date : " + test.get(i).getStart_day() + " / " +
-                            "end_date : " + test.get(i).getEnd_day() + " / " +
-                            "number_of_member : " + test.get(i).getNumber_of_member() + " / " +
-                            "total_money : " + test.get(i).getTotal_money() + " / "
-                            +"created_at : " + test.get(i).getCreated_at() + " / "
-                            +"updated_at : " + test.get(i).getUpdate_at() + " / "
-                    ;
-                    Log.d("trip data",msg);
+                    PortfolioQuery.insertTrip(
+                            daoSession,
+                            arrayList_Trip,
+                            text_Trip_title.getText().toString(),
+                            start_Date,
+                            end_Date,
+                            number_of_member,
+                            Long.valueOf(text_Trip_budget.getText().toString())
+                    );
+                    Intent intent = new Intent(AddTripActivity.this, ListTripActivity.class);
+                    startActivity(intent);
+                    List<Trip> test = daoSession.getTripDao().queryBuilder().list();
+                    for (int i = 0; i < test.size(); i++) {
+                        String msg = "trip - " +
+                                "id : " + test.get(i).getId() + " / " +
+                                "title : " + test.get(i).getTitle() + " / " +
+                                "start_date : " + test.get(i).getStart_day() + " / " +
+                                "end_date : " + test.get(i).getEnd_day() + " / " +
+                                "number_of_member : " + test.get(i).getNumber_of_member() + " / " +
+                                "total_money : " + test.get(i).getTotal_money() + " / "
+                                + "created_at : " + test.get(i).getCreated_at() + " / "
+                                + "updated_at : " + test.get(i).getUpdate_at() + " / ";
+                        Log.d("trip data", msg);
+                    }
                 }
                 break;
         }
@@ -145,10 +166,21 @@ public class AddTripActivity extends AppCompatActivity {
         public void onClick(View view) {
             switch (view.getId()) {
                 case R.id.date_Trip_start:
-                    new DatePickerDialog(AddTripActivity.this, dateSetListener1, trip_year, trip_month, trip_day).show();
+                    Calendar cal_Start1 = Calendar.getInstance();
+                    cal_Start1.set(trip_year,trip_month,trip_day);
+                    DatePickerDialog dialog1 = new DatePickerDialog(AddTripActivity.this, dateSetListener1, trip_year, trip_month, trip_day);
+
+                    dialog1.getDatePicker().setMinDate(cal_Start1.getTimeInMillis());    //입력한 날짜 이후로 클릭 안되게 옵션
+                    dialog1.show();
+
                     break;
                 case R.id.date_Trip_end:
-                    new DatePickerDialog(AddTripActivity.this, dateSetListener2, trip_year, trip_month, trip_day).show();
+                    Calendar cal_Start2 = Calendar.getInstance();
+                    cal_Start2.set(start_year,start_month-1,start_day);
+                    DatePickerDialog dialog = new DatePickerDialog(AddTripActivity.this, dateSetListener2, trip_year, trip_month, trip_day);
+
+                    dialog.getDatePicker().setMinDate(cal_Start2.getTimeInMillis());    //입력한 날짜 이후로 클릭 안되게 옵션
+                    dialog.show();
                     break;
                 case R.id.member_add:
                     number_of_member++;

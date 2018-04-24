@@ -76,9 +76,10 @@ public class ScheduleTripActivity extends AppCompatActivity implements WeekView.
                         for (j=0;j<arrayList_schedule.size();j++){
                             if(arrayList_schedule.get(j).getPlace_name().equals(weekview_name)){
                                 PortfolioQuery.deleteSchduleById(daoSession,arrayList_schedule.get(j).getId());
-                                weekView.notifyDatasetChanged();
+
                             }
                         }
+                        weekView.notifyDatasetChanged();
                     }
                 });
                 alert.setNegativeButton("Cancle", new DialogInterface.OnClickListener() {

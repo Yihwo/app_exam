@@ -17,11 +17,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".TestActivity"></activity>
-        <activity android:name=".AddTripActivity"></activity>
-        <activity android:name=".ListTripActivity"></activity>
-        <activity android:name=".ScheduleTripActivity"></activity>
-        <activity android:name=".AddScheduleActivity"></activity>
+        <activity
+            android:name=".TestActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".AddTripActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ListTripActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ScheduleTripActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".AddScheduleActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
 </manifest>

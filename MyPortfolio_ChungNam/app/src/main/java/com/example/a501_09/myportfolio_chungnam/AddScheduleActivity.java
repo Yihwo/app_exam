@@ -31,6 +31,7 @@ import com.example.a501_09.myportfolio_chungnam.db.Trip;
 import com.example.a501_09.myportfolio_chungnam.util.Util;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
@@ -123,6 +124,7 @@ public class AddScheduleActivity extends AppCompatActivity {
         txt_place_name.setText(Util.getPlaceTitle(AddScheduleActivity.this));
 
         editText_budget.setOnFocusChangeListener(new BudgetMyListener());
+        convertTime(play_time);
 
 
         for(int i=0;i < arrayList_Place.size();i++){
@@ -155,36 +157,48 @@ public class AddScheduleActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case R.id.toolbar_item_check_trip:
-                Toast.makeText(this, "일정 추가", Toast.LENGTH_SHORT).show();
-                Date ElapseDate = setTimeNowToVisited();
-                Date VisitDate = new Date();
-                elapse_min = ElapseDate.getMinutes();
-                elapse_hour = ElapseDate.getHours();
-                elapse_day = visit_day;
-                elapse_month = visit_month;
-                elapse_year = visit_year;
+                if(txt_visitDate.getText().toString().equals("")){
+                    Toast.makeText(this, "여행시작 일자를 넣어주세요", Toast.LENGTH_SHORT).show();
+                    break;
+                }else if(txt_time.getText().toString().equals("")){
+                    Toast.makeText(this, "방문 시간을 넣어주세요", Toast.LENGTH_SHORT).show();
+                    break;
+                }else if(editText_budget.getText().toString().equals("")){
+                    Toast.makeText(this, "지출금액을 넣어주세요", Toast.LENGTH_SHORT).show();
+                    break;
+                }else {
+                    Toast.makeText(this, "일정 추가", Toast.LENGTH_SHORT).show();
+                    Date ElapseDate = setTimeNowToVisited();
+                    Date VisitDate = new Date();
+                    elapse_min = ElapseDate.getMinutes();
+                    elapse_hour = ElapseDate.getHours();
+                    elapse_day = visit_day;
+                    elapse_month = visit_month;
+                    elapse_year = visit_year;
 //                elapse_day = arrayList_Trip.get(trip_index).getStart_day().getDate();
 //                elapse_month = arrayList_Trip.get(trip_index).getStart_day().getMonth();
 //                elapse_year = arrayList_Trip.get(trip_index).getStart_day().getYear();
 
-                VisitDate.setHours(sche_hour);
-                VisitDate.setMinutes(sche_minute);
-                PortfolioQuery.insertSchedule(daoSession,
-                        arrayList_Schedule,
-                        txt_place_name.getText().toString(),
-                        new Date(elapse_year,elapse_month,elapse_day,elapse_hour,elapse_min),
-                        Long.parseLong(editText_budget.getText().toString()),
-                        new Date(visit_year,visit_month,visit_day,VisitDate.getHours(),VisitDate.getMinutes()),
-                        trip_index,
-                        place_index
-                );
-                PortfolioQuery.logSchedule("mySchedule",arrayList_Schedule);
+                    VisitDate.setHours(sche_hour);
+                    VisitDate.setMinutes(sche_minute);
+                    PortfolioQuery.insertSchedule(daoSession,
+                            arrayList_Schedule,
+                            txt_place_name.getText().toString(),
+                            new Date(elapse_year, elapse_month, elapse_day, elapse_hour, elapse_min),
+                            Long.parseLong(editText_budget.getText().toString()),
+                            new Date(visit_year, visit_month, visit_day, VisitDate.getHours(), VisitDate.getMinutes()),
+                            trip_index,
+                            place_index
+                    );
+                    PortfolioQuery.logSchedule("mySchedule", arrayList_Schedule);
 
-                Intent intent = new Intent(AddScheduleActivity.this,ScheduleTripActivity.class);
-                intent.putExtra("SELECTED_TRIP",trip_index);
-                startActivity(intent);
-                finish();
-                return  true;
+                    Intent intent = new Intent(AddScheduleActivity.this, ScheduleTripActivity.class);
+                    intent.putExtra("SELECTED_TRIP", trip_index);
+                    startActivity(intent);
+                    finish();
+                }
+                return true;
+
         }
         return super.onOptionsItemSelected(menuItem);
     }
@@ -274,7 +288,20 @@ public class AddScheduleActivity extends AppCompatActivity {
                     new TimePickerDialog(AddScheduleActivity.this, timeSetListener, sche_hour, sche_minute, true).show();
                     break;
                 case R.id.txt_visitDate:
-                    new DatePickerDialog(AddScheduleActivity.this,dateSetListener,trip_year,trip_month,trip_day).show();
+                    Calendar cal_Start = Calendar.getInstance();
+                    Calendar cal_End = Calendar.getInstance();
+                    cal_Start.set(arrayList_Trip.get(trip_index).getStart_day().getYear(),
+                            arrayList_Trip.get(trip_index).getStart_day().getMonth()-1 ,
+                            arrayList_Trip.get(trip_index).getStart_day().getDate());
+                    cal_End.set(arrayList_Trip.get(trip_index).getEnd_day().getYear(),
+                            arrayList_Trip.get(trip_index).getEnd_day().getMonth()-1,
+                            arrayList_Trip.get(trip_index).getEnd_day().getDate());
+
+                    DatePickerDialog dialog = new DatePickerDialog(AddScheduleActivity.this,dateSetListener,trip_year,trip_month,trip_day);
+                    dialog.getDatePicker().setMinDate(cal_Start.getTimeInMillis());    //입력한 날짜 이후로 클릭 안되게 옵션
+                    dialog.getDatePicker().setMaxDate(cal_End.getTimeInMillis());
+                    dialog.show();
+//                    new DatePickerDialog(AddScheduleActivity.this,dateSetListener,trip_year,trip_month,trip_day).show();
                     break;
             }
         }
