@@ -62,7 +62,7 @@ public class AddScheduleActivity extends AppCompatActivity {
     int elapse_day,elapse_min,elapse_hour,elapse_month,elapse_year,visit_day,visit_month,visit_year;
     int trip_year,trip_month,trip_day;
 
-    boolean isStart = false;
+    boolean isPossible = false;
 
     long budget_Left;
     long budget_schedule = 0;
@@ -178,7 +178,10 @@ public class AddScheduleActivity extends AppCompatActivity {
                 }else if(editText_budget.getText().toString().equals("")){
                     Toast.makeText(this, "지출금액을 넣어주세요", Toast.LENGTH_SHORT).show();
                     break;
-                }else {
+                }else if(isPossible==true){
+                    Toast.makeText(AddScheduleActivity.this, "예산을 초과하였습니다.", Toast.LENGTH_SHORT).show();
+                }
+                else {
                     Toast.makeText(this, "일정 추가", Toast.LENGTH_SHORT).show();
                     Date ElapseDate = setTimeNowToVisited();
                     Date VisitDate = new Date();
@@ -328,8 +331,14 @@ public class AddScheduleActivity extends AppCompatActivity {
                     break;
                 case R.id.budget_check:
                     budget_schedule = Long.valueOf(editText_budget.getText().toString());
-                    budget_Left = budget_Left - budget_schedule;
-                    textView_budgetLeft.setText("남은 금액"+budget_Left+"원");
+                    if(budget_Left<budget_schedule){
+                        Toast.makeText(AddScheduleActivity.this, "예산을 초과하였습니다.", Toast.LENGTH_SHORT).show();
+                        isPossible = true;
+                    }else{
+                        budget_Left = budget_Left - budget_schedule;
+                        textView_budgetLeft.setText("남은 금액"+budget_Left+"원");
+                        isPossible = false;
+                    }
                     break;
             }
         }

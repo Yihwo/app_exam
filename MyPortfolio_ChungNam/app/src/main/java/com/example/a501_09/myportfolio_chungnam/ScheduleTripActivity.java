@@ -138,13 +138,14 @@ public class ScheduleTripActivity extends AppCompatActivity implements WeekView.
 
     }
     private void getLeftBudget(){
+        allSpendMoney = 0;
         for(int i = 0; i<arrayList_schedule.size(); i++){
             allSpendMoney = allSpendMoney + arrayList_schedule.get(i).getSpend_money();
         }
         all_left_money = arrayList_trip.get(trip_index).getTotal_money() - allSpendMoney;
         String total = String.valueOf(all_left_money);
-        txt_left_budget.setText(total+"원");
-        Toast.makeText(this, total+"원", Toast.LENGTH_SHORT).show();
+        txt_left_budget.setText(total + "원");
+
     }
     public void onEventClick(WeekViewEvent event, RectF eventRect){
 

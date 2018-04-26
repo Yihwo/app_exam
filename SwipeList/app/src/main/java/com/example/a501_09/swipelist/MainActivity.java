@@ -43,8 +43,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-
         SwipeMenuCreator creator = new SwipeMenuCreator() {
             @Override
             public void create(SwipeMenu menu) {
