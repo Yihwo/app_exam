@@ -53,7 +53,7 @@ public class AddScheduleActivity extends AppCompatActivity {
     TimeSetListener timeSetListener;
     DateSetListener dateSetListener;
     int sche_hour, sche_minute, play_time = 30;
-    ImageButton time_min, time_add;
+    ImageButton time_min, time_add, budget_check;
     ImageView imageView_place;
 
     int play_hour=0,play_minute=0;
@@ -106,6 +106,7 @@ public class AddScheduleActivity extends AppCompatActivity {
 
         time_min = (ImageButton) findViewById(R.id.time_min);
         time_add = (ImageButton) findViewById(R.id.time_add);
+        budget_check = (ImageButton)findViewById(R.id.budget_check);
 
         txt_time = (EditText) findViewById(R.id.txt_time);
         txt_visitDate = (EditText)findViewById(R.id.txt_visitDate);
@@ -124,6 +125,7 @@ public class AddScheduleActivity extends AppCompatActivity {
 
         time_add.setOnClickListener(new CompoOncliclistener());
         time_min.setOnClickListener(new CompoOncliclistener());
+        budget_check.setOnClickListener(new CompoOncliclistener());
 
         txt_time.setOnClickListener(new CompoOncliclistener());
         txt_visitDate.setOnClickListener(new CompoOncliclistener());
@@ -132,27 +134,10 @@ public class AddScheduleActivity extends AppCompatActivity {
         convertTime(play_time);
 
         budget_Left = arrayList_Trip.get(trip_index).getTotal_money();
+        for (int i=0; i<arrayList_Schedule.size(); i++){
+            budget_Left = budget_Left - arrayList_Schedule.get(i).getSpend_money();
+        }
         textView_budgetLeft.setText("남은 금액"+budget_Left+"원");
-
-        editText_budget.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                Toast.makeText(AddScheduleActivity.this, "111111", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                Toast.makeText(AddScheduleActivity.this, "22222", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                Toast.makeText(AddScheduleActivity.this, "333333", Toast.LENGTH_SHORT).show();
-                budget_schedule = Long.valueOf(editable.toString());
-                budget_Left = budget_Left-budget_schedule;
-                textView_budgetLeft.setText("남은 금액"+budget_Left+"원");
-            }
-        });
 
         for(int i=0;i < arrayList_Place.size();i++){
             if(arrayList_Place.get(i).getName().equals(Util.getPlaceTitle(AddScheduleActivity.this))){
@@ -293,6 +278,11 @@ public class AddScheduleActivity extends AppCompatActivity {
     class CompoOncliclistener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
+            budget_Left = arrayList_Trip.get(trip_index).getTotal_money();
+            for (int i=0; i<arrayList_Schedule.size(); i++){
+                budget_Left = budget_Left - arrayList_Schedule.get(i).getSpend_money();
+            }
+            textView_budgetLeft.setText("남은 금액"+budget_Left+"원");
             switch (view.getId()) {
                 case R.id.time_add:
                     play_time = play_time + 30;
@@ -335,6 +325,11 @@ public class AddScheduleActivity extends AppCompatActivity {
                     dialog.getDatePicker().setMaxDate(cal_End.getTimeInMillis());
                     dialog.show();
 //                    new DatePickerDialog(AddScheduleActivity.this,dateSetListener,trip_year,trip_month,trip_day).show();
+                    break;
+                case R.id.budget_check:
+                    budget_schedule = Long.valueOf(editText_budget.getText().toString());
+                    budget_Left = budget_Left - budget_schedule;
+                    textView_budgetLeft.setText("남은 금액"+budget_Left+"원");
                     break;
             }
         }

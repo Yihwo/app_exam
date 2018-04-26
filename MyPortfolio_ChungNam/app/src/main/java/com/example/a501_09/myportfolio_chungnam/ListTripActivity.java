@@ -56,8 +56,8 @@ public class ListTripActivity extends AppCompatActivity {
         printTripAndSchedule();
     }
     private void printTripAndSchedule(){
-        PortfolioQuery.logTrip("My Trip",arrayList_trip);
-        PortfolioQuery.logSchedule("My Schedule",arrayList_schedule);
+        PortfolioQuery.logTrip("MyTrip",arrayList_trip);
+        PortfolioQuery.logSchedule("MySchedule",arrayList_schedule);
     }
     private void setTripList(){
         tripListAdapter = new TripListAdapter(ListTripActivity.this,arrayList_trip,R.layout.item_trip_list);
@@ -103,7 +103,7 @@ public class ListTripActivity extends AppCompatActivity {
                 // set item width
                 deleteItem.setWidth(dp2px(90));
                 // set a icon
-                deleteItem.setIcon(R.drawable.ic_remove_black_24dp);
+                deleteItem.setIcon(R.drawable.ic_delete_white_24dp);
                 // add to menu
                 menu.addMenuItem(deleteItem);
             }

@@ -39,7 +39,9 @@ public class ScheduleTripActivity extends AppCompatActivity implements WeekView.
     int trip_index;
     ArrayList<Trip> arrayList_trip;
     ArrayList<Schedule> arrayList_schedule;
-    TextView txt_sche_title,txt_sche_date,txt_sche_budget,txt_sche_member;
+    TextView txt_sche_title,txt_sche_date,txt_sche_budget,txt_sche_member,txt_left_budget;
+    long allSpendMoney=0;
+    long all_left_money;
     boolean bSetSchedule = false;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -103,6 +105,7 @@ public class ScheduleTripActivity extends AppCompatActivity implements WeekView.
         weekView.setMonthChangeListener(monthChangeListener);
     }
     private void setComponent(){
+        txt_left_budget = (TextView)findViewById(R.id.txt_left_budget);
         txt_sche_title = (TextView)findViewById(R.id.txt_sche_title);
         txt_sche_date = (TextView)findViewById(R.id.txt_sche_date);
         txt_sche_member = (TextView)findViewById(R.id.txt_sche_member);
@@ -119,6 +122,8 @@ public class ScheduleTripActivity extends AppCompatActivity implements WeekView.
         txt_sche_member.setText(target.getNumber_of_member().toString() + " 명");
         txt_sche_budget.setText(target.getTotal_money().toString() + " 원");
         txt_sche_date.setText(start_day+"~"+end_day);
+        String total = String.valueOf(all_left_money);
+        txt_left_budget.setText(total+"원");
     }
     private void setData(){
         daoSession = ((AppController) getApplication()).getDaoSession();
@@ -128,6 +133,10 @@ public class ScheduleTripActivity extends AppCompatActivity implements WeekView.
         trip_index = intent.getIntExtra("SELECTED_TRIP", -1);
         arrayList_trip= TripList.getInstance();
         arrayList_schedule = ScheduleList.getInstance();
+        for(int i = 0; i<arrayList_schedule.size(); i++){
+            allSpendMoney = allSpendMoney + arrayList_schedule.get(i).getSpend_money();
+        }
+        all_left_money = arrayList_trip.get(trip_index).getTotal_money() - allSpendMoney;
     }
 
     public void onEventClick(WeekViewEvent event, RectF eventRect){
