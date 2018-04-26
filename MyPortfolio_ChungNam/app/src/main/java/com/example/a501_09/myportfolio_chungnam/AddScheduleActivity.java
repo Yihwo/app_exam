@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
 import android.text.InputType;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -60,6 +62,10 @@ public class AddScheduleActivity extends AppCompatActivity {
     int elapse_day,elapse_min,elapse_hour,elapse_month,elapse_year,visit_day,visit_month,visit_year;
     int trip_year,trip_month,trip_day;
 
+    boolean isStart = false;
+
+    long budget_Left;
+    long budget_schedule = 0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -123,9 +129,30 @@ public class AddScheduleActivity extends AppCompatActivity {
         txt_visitDate.setOnClickListener(new CompoOncliclistener());
         txt_place_name.setText(Util.getPlaceTitle(AddScheduleActivity.this));
 
-        editText_budget.setOnFocusChangeListener(new BudgetMyListener());
         convertTime(play_time);
 
+        budget_Left = arrayList_Trip.get(trip_index).getTotal_money();
+        textView_budgetLeft.setText("남은 금액"+budget_Left+"원");
+
+        editText_budget.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                Toast.makeText(AddScheduleActivity.this, "111111", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                Toast.makeText(AddScheduleActivity.this, "22222", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                Toast.makeText(AddScheduleActivity.this, "333333", Toast.LENGTH_SHORT).show();
+                budget_schedule = Long.valueOf(editable.toString());
+                budget_Left = budget_Left-budget_schedule;
+                textView_budgetLeft.setText("남은 금액"+budget_Left+"원");
+            }
+        });
 
         for(int i=0;i < arrayList_Place.size();i++){
             if(arrayList_Place.get(i).getName().equals(Util.getPlaceTitle(AddScheduleActivity.this))){
@@ -187,9 +214,10 @@ public class AddScheduleActivity extends AppCompatActivity {
                             new Date(elapse_year, elapse_month, elapse_day, elapse_hour, elapse_min),
                             Long.parseLong(editText_budget.getText().toString()),
                             new Date(visit_year, visit_month, visit_day, VisitDate.getHours(), VisitDate.getMinutes()),
-                            trip_index,
-                            place_index
+                            arrayList_Trip.get(trip_index).getId(),
+                            arrayList_Place.get(place_index).getId()
                     );
+
                     PortfolioQuery.logSchedule("mySchedule", arrayList_Schedule);
 
                     Intent intent = new Intent(AddScheduleActivity.this, ScheduleTripActivity.class);
@@ -202,16 +230,21 @@ public class AddScheduleActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(menuItem);
     }
-    class BudgetMyListener implements View.OnFocusChangeListener{
-        @Override
-        public void onFocusChange(View view, boolean b) {
-//            Toast.makeText(AddScheduleActivity.this,arrayList_Trip.get(trip_index).getTotal_money()+"원", Toast.LENGTH_SHORT).show();
-//            long budget = Long.valueOf(editText_budget.getText().toString());
+//    class BudgetMyListener implements View.OnFocusChangeListener{
+//        @Override
+//        public void onFocusChange(View view, boolean b) {
+//            //Toast.makeText(AddScheduleActivity.this,arrayList_Trip.get(trip_index).getTotal_money()+"원", Toast.LENGTH_SHORT).show();
+//
 //            long result = arrayList_Trip.get(trip_index).getTotal_money();
-//            result = result-budget;
-//            textView_budgetLeft.setText(result+"원");
-        }
-    }
+//            if(!isStart){
+//                isStart = true;
+//            }else {
+//                long budget = Long.valueOf(editText_budget.getText().toString());
+//                result = result - budget;
+//                textView_budgetLeft.setText(result + "원");
+//            }
+//        }
+//    }
     class TimeSetListener implements TimePickerDialog.OnTimeSetListener {
         @Override
         public void onTimeSet(TimePicker timePicker, int i, int i1) {

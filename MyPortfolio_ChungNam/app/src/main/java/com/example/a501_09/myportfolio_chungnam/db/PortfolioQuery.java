@@ -57,7 +57,7 @@ public class PortfolioQuery {
         }
     }
 
-    public static int updateTrip(DaoSession daoSession, int id,
+    public static long updateTrip(DaoSession daoSession, long id,
                                  String title, Date start_date, Date end_date,
                                  int number_of_member, long total_money) {
         Trip temp_trip = daoSession.getTripDao().queryBuilder()
@@ -77,7 +77,7 @@ public class PortfolioQuery {
             return -1;
         }
     }
-    public static int updateSchedule(DaoSession daoSession, int id,
+    public static long updateSchedule(DaoSession daoSession, long id,
                                      String place_name, Date elapsed_time,
                                      long spending_money, Date visit_time,
                                      long trip_id, long place_id) {
@@ -101,7 +101,7 @@ public class PortfolioQuery {
         }
     }
 
-    public static int updatePlace(DaoSession daoSession, int id, String name,
+    public static long updatePlace(DaoSession daoSession, long id, String name,
                                   String desc, String img_name) {
 
         Place temp_place = daoSession.getPlaceDao().queryBuilder()

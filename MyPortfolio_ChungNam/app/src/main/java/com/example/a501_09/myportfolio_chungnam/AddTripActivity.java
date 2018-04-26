@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.a501_09.myportfolio_chungnam.datalist.TripList;
@@ -44,12 +45,14 @@ public class AddTripActivity extends AppCompatActivity {
     EditText text_Trip_budget;
     ImageButton member_add;
     ImageButton member_min;
+
     Toolbar toolbar_addTrip;
     int start_year, start_month, start_day;
     int end_year, end_month, end_day;
     int number_of_member = 1;
     int trip_year,trip_month,trip_day;
     int trip_index;
+    int page_selected_count;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -62,6 +65,7 @@ public class AddTripActivity extends AppCompatActivity {
         setComponents();
         Intent intent = getIntent();
         //인텐트에서 데이터를 읽음
+        page_selected_count = intent.getIntExtra("UPDATE_TRIP",-1);
         trip_index = intent.getIntExtra("SELECTED_TRIP", -1);
         Toast.makeText(this, trip_index+"번째", Toast.LENGTH_SHORT).show();
     }
@@ -89,7 +93,6 @@ public class AddTripActivity extends AppCompatActivity {
         date_Trip_end.setOnClickListener(new AddTripListener());
         member_add.setOnClickListener(new AddTripListener());
         member_min.setOnClickListener(new AddTripListener());
-
     }
 
     private void setToolbar() {
@@ -130,15 +133,28 @@ public class AddTripActivity extends AppCompatActivity {
                     Toast.makeText(this, "여행 추가", Toast.LENGTH_SHORT).show();
                     //여행 추가 01
 
-                    PortfolioQuery.insertTrip(
-                            daoSession,
-                            arrayList_Trip,
-                            text_Trip_title.getText().toString(),
-                            start_Date,
-                            end_Date,
-                            number_of_member,
-                            Long.valueOf(text_Trip_budget.getText().toString())
-                    );
+                    if(page_selected_count == 1){
+                        Toast.makeText(this, "update", Toast.LENGTH_SHORT).show();
+                        PortfolioQuery.updateTrip(
+                                daoSession,
+                                arrayList_Trip.get(trip_index).getId(),
+                                text_Trip_title.getText().toString(),
+                                start_Date,
+                                end_Date,
+                                number_of_member,
+                                Long.valueOf(text_Trip_budget.getText().toString())
+                        );
+                    }else {
+                        PortfolioQuery.insertTrip(
+                                daoSession,
+                                arrayList_Trip,
+                                text_Trip_title.getText().toString(),
+                                start_Date,
+                                end_Date,
+                                number_of_member,
+                                Long.valueOf(text_Trip_budget.getText().toString())
+                        );
+                    }
                     Intent intent = new Intent(AddTripActivity.this, ListTripActivity.class);
                     startActivity(intent);
                     List<Trip> test = daoSession.getTripDao().queryBuilder().list();

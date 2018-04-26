@@ -73,10 +73,11 @@ public class ScheduleTripActivity extends AppCompatActivity implements WeekView.
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         int j;
+                        String temp;
                         for (j=0;j<arrayList_schedule.size();j++){
-                            if(arrayList_schedule.get(j).getPlace_name().equals(weekview_name)){
+                            temp = arrayList_schedule.get(j).getPlace_name()+"\n"+arrayList_schedule.get(j).getSpend_money()+"원";
+                            if(temp.equals(weekview_name)){
                                 PortfolioQuery.deleteSchduleById(daoSession,arrayList_schedule.get(j).getId());
-
                             }
                         }
                         weekView.notifyDatasetChanged();
@@ -89,16 +90,14 @@ public class ScheduleTripActivity extends AppCompatActivity implements WeekView.
                     }
                 });
                 alert.show();
-
-
-
                 //PortfolioQuery.deleteSchduleById();
             }
         });
         MonthLoader.MonthChangeListener monthChangeListener = new MonthLoader.MonthChangeListener() {
             @Override
-            public List<? extends WeekViewEvent> onMonthChange(int newYear, int newMonth) {
-                return setWeekViewEvent(bSetSchedule,trip_index,arrayList_schedule);
+            public List<WeekViewEvent> onMonthChange(int newYear, int newMonth) {
+                return setWeekViewEvent(
+                        bSetSchedule, trip_index, arrayList_schedule, newYear, newMonth);
             }
         };
         weekView.setMonthChangeListener(monthChangeListener);
@@ -171,7 +170,7 @@ public class ScheduleTripActivity extends AppCompatActivity implements WeekView.
     }
 
     private List<WeekViewEvent> setWeekViewEvent(boolean bSetSchedule,
-                                                 int trip_index, ArrayList<Schedule> arrayList_schedule) {
+                                                 int trip_index, ArrayList<Schedule> arrayList_schedule,int year, int month) {
         Calendar startTime;
         Calendar endTime;
         Date visit_time;
@@ -194,7 +193,10 @@ public class ScheduleTripActivity extends AppCompatActivity implements WeekView.
             ArrayList<Schedule> schedules = new ArrayList<Schedule>();
             for(int i = 0; i < arrayList_schedule.size(); i++) {
 
-                if(arrayList_schedule.get(i).getTrip_id() == trip_index) {
+                if(arrayList_schedule.get(i).getTrip_id() ==
+                        arrayList_trip.get(trip_index).getId() &&
+                        arrayList_schedule.get(i).getVisit_time().getYear() == year &&
+                        arrayList_schedule.get(i).getVisit_time().getMonth() == month) {
                     schedules.add(arrayList_schedule.get(i));
 
                 }
@@ -217,7 +219,7 @@ public class ScheduleTripActivity extends AppCompatActivity implements WeekView.
                 endTime.set(Calendar.MONTH, elapse_time.getMonth()-1);
                 endTime.set(Calendar.YEAR, elapse_time.getYear());
 
-                WeekViewEvent event = new WeekViewEvent(k, schedules.get(k).getPlace_name()+"\n금액",
+                WeekViewEvent event = new WeekViewEvent(k, schedules.get(k).getPlace_name()+"\n"+schedules.get(k).getSpend_money()+"원",
                         startTime, endTime);
 
 
@@ -226,7 +228,7 @@ public class ScheduleTripActivity extends AppCompatActivity implements WeekView.
                 events.add(event);
 
             }
-            this.bSetSchedule = true;
+            //this.bSetSchedule = true;
 
         }
 
