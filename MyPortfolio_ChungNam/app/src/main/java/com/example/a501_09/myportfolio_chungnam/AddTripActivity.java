@@ -67,7 +67,6 @@ public class AddTripActivity extends AppCompatActivity {
         //인텐트에서 데이터를 읽음
         page_selected_count = intent.getIntExtra("UPDATE_TRIP",-1);
         trip_index = intent.getIntExtra("SELECTED_TRIP", -1);
-        Toast.makeText(this, trip_index+"번째", Toast.LENGTH_SHORT).show();
     }
 
     private void setComponents() {
@@ -134,7 +133,6 @@ public class AddTripActivity extends AppCompatActivity {
                     //여행 추가 01
 
                     if(page_selected_count == 1){
-                        Toast.makeText(this, "update", Toast.LENGTH_SHORT).show();
                         PortfolioQuery.updateTrip(
                                 daoSession,
                                 arrayList_Trip.get(trip_index).getId(),

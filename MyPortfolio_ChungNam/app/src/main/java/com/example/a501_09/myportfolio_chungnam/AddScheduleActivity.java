@@ -182,7 +182,6 @@ public class AddScheduleActivity extends AppCompatActivity {
                     Toast.makeText(AddScheduleActivity.this, "예산을 초과하였습니다.", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    Toast.makeText(this, "일정 추가", Toast.LENGTH_SHORT).show();
                     Date ElapseDate = setTimeNowToVisited();
                     Date VisitDate = new Date();
                     elapse_min = ElapseDate.getMinutes();
@@ -290,7 +289,6 @@ public class AddScheduleActivity extends AppCompatActivity {
                 case R.id.time_add:
                     play_time = play_time + 30;
                     editText_playTime.setText(convertTime(play_time));
-                    Toast.makeText(AddScheduleActivity.this, setTimeNowToVisited().getHours()+" : "+setTimeNowToVisited().getMinutes(), Toast.LENGTH_SHORT).show();
                     break;
                     //int tcnt=0;
                     //while(play_time == 0){
@@ -307,7 +305,6 @@ public class AddScheduleActivity extends AppCompatActivity {
                     } else {
                         play_time = play_time - 30;
                         editText_playTime.setText(convertTime(play_time));
-                        Toast.makeText(AddScheduleActivity.this, setTimeNowToVisited().getHours()+" : "+setTimeNowToVisited().getMinutes(), Toast.LENGTH_SHORT).show();
                     }
                     break;
                 case R.id.txt_time:

@@ -168,7 +168,6 @@ public class ScheduleTripActivity extends AppCompatActivity implements WeekView.
     public boolean onOptionsItemSelected(MenuItem menuItem){
         switch(menuItem.getItemId()){
             case R.id.toolbar_item_add_trip:
-                Toast.makeText(this, "일정 추가", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(ScheduleTripActivity.this, AddScheduleActivity.class);
                 intent.putExtra("SELECTED_TRIP",trip_index);
                 startActivity(intent);
