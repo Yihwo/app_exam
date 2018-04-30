@@ -80,13 +80,12 @@ public class ListTripActivity extends AppCompatActivity {
                 SwipeMenuItem openItem = new SwipeMenuItem(
                         getApplicationContext());
                 // set item background
-                openItem.setBackground(new ColorDrawable(Color.rgb(0xC9, 0xC9,
-                        0xCE)));
+                openItem.setBackground(new ColorDrawable(Color.LTGRAY));
 
                 // set item width
                 openItem.setWidth(dp2px(90));
                 // set item title
-                openItem.setTitle("OPEN");
+                openItem.setTitle("수 정");
                 // set item title fontsize
                 openItem.setTitleSize(18);
                 // set item title font color

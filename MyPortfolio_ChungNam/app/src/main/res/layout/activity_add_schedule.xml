@@ -159,7 +159,7 @@
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:paddingTop="15dp"
-        android:text="예산"
+        android:text="예     산"
         android:textAlignment="textStart"
         android:textColor="@color/colorChngNam"
         android:textSize="20sp"
@@ -217,11 +217,11 @@
         android:background="@drawable/border"
         android:ems="10"
         android:hint="지출 금액"
-        android:inputType="textPersonName"
+        android:inputType="number"
         android:paddingRight="20dp"
         android:textAlignment="textEnd"
         app:layout_constraintBottom_toTopOf="@+id/guideline31"
-        app:layout_constraintEnd_toStartOf="@+id/guideline33"
+        app:layout_constraintEnd_toStartOf="@+id/guideline26"
         app:layout_constraintStart_toStartOf="@+id/guideline25"
         app:layout_constraintTop_toTopOf="@+id/guideline30" />
 
@@ -348,20 +348,5 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline26"
         app:layout_constraintStart_toStartOf="@+id/guideline25"
         app:layout_constraintTop_toTopOf="@+id/guideline18" />
-
-    <ImageButton
-        android:id="@+id/budget_check"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:background="@color/colorChngNam"
-        app:layout_constraintBottom_toTopOf="@+id/guideline31"
-        app:layout_constraintEnd_toStartOf="@+id/guideline26"
-        app:layout_constraintStart_toStartOf="@+id/guideline33"
-        app:layout_constraintTop_toTopOf="@+id/guideline30"
-        app:srcCompat="@mipmap/ic_done_black_24dp" />
 
 </android.support.constraint.ConstraintLayout>

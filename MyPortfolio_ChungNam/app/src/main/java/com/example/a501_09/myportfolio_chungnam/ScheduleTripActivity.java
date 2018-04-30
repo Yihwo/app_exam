@@ -204,20 +204,15 @@ public class ScheduleTripActivity extends AppCompatActivity implements WeekView.
 
         ArrayList<WeekViewEvent> events = new ArrayList<WeekViewEvent>();
         if(!bSetSchedule) {
-
-
             ArrayList<Schedule> schedules = new ArrayList<Schedule>();
             for(int i = 0; i < arrayList_schedule.size(); i++) {
-
                 if(arrayList_schedule.get(i).getTrip_id() ==
                         arrayList_trip.get(trip_index).getId() &&
                         arrayList_schedule.get(i).getVisit_time().getYear() == year &&
                         arrayList_schedule.get(i).getVisit_time().getMonth() == month) {
                     schedules.add(arrayList_schedule.get(i));
-
                 }
             }
-
             for(int k = 0; k < schedules.size(); k++) {
                 visit_time = schedules.get(k).getVisit_time();
                 elapse_time = schedules.get(k).getElapse_time();
@@ -237,18 +232,12 @@ public class ScheduleTripActivity extends AppCompatActivity implements WeekView.
 
                 WeekViewEvent event = new WeekViewEvent(k, schedules.get(k).getPlace_name()+"\n"+schedules.get(k).getSpend_money()+"원",
                         startTime, endTime);
-
-
                 WeekViewEvent event2 = new WeekViewEvent();
                 event.setColor(getResources().getColor(color_arr[(k % color_arr.length)]));
                 events.add(event);
-
             }
             //this.bSetSchedule = true;
-
         }
-
-
         return events;
     }
 }

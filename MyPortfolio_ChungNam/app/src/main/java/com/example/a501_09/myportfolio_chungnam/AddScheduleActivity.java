@@ -74,7 +74,23 @@ public class AddScheduleActivity extends AppCompatActivity {
         setData();
         setComponent();
         setToolbar();
-
+        editText_budget.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String temp_str = editable.toString();
+                long temp_long;
+                if(temp_str.equals("")){
+                    temp_long=0;
+                }else{
+                    temp_long = Long.parseLong(temp_str);
+                }
+                textView_budgetLeft.setText("남은 금액"+(budget_Left - temp_long)+" 원");
+            }
+        });
     }
     private void setData(){
         daoSession = ((AppController) getApplication()).getDaoSession();
@@ -106,7 +122,7 @@ public class AddScheduleActivity extends AppCompatActivity {
 
         time_min = (ImageButton) findViewById(R.id.time_min);
         time_add = (ImageButton) findViewById(R.id.time_add);
-        budget_check = (ImageButton)findViewById(R.id.budget_check);
+        //budget_check = (ImageButton)findViewById(R.id.budget_check);
 
         txt_time = (EditText) findViewById(R.id.txt_time);
         txt_visitDate = (EditText)findViewById(R.id.txt_visitDate);
@@ -125,7 +141,7 @@ public class AddScheduleActivity extends AppCompatActivity {
 
         time_add.setOnClickListener(new CompoOncliclistener());
         time_min.setOnClickListener(new CompoOncliclistener());
-        budget_check.setOnClickListener(new CompoOncliclistener());
+        //budget_check.setOnClickListener(new CompoOncliclistener());
 
         txt_time.setOnClickListener(new CompoOncliclistener());
         txt_visitDate.setOnClickListener(new CompoOncliclistener());
@@ -137,7 +153,7 @@ public class AddScheduleActivity extends AppCompatActivity {
         for (int i=0; i<arrayList_Schedule.size(); i++){
             budget_Left = budget_Left - arrayList_Schedule.get(i).getSpend_money();
         }
-        textView_budgetLeft.setText("남은 금액"+budget_Left+"원");
+        textView_budgetLeft.setText("남은 금액"+budget_Left+" 원");
 
         for(int i=0;i < arrayList_Place.size();i++){
             if(arrayList_Place.get(i).getName().equals(Util.getPlaceTitle(AddScheduleActivity.this))){
@@ -326,17 +342,21 @@ public class AddScheduleActivity extends AppCompatActivity {
                     dialog.show();
 //                    new DatePickerDialog(AddScheduleActivity.this,dateSetListener,trip_year,trip_month,trip_day).show();
                     break;
-                case R.id.budget_check:
-                    budget_schedule = Long.valueOf(editText_budget.getText().toString());
-                    if(budget_Left<budget_schedule){
-                        Toast.makeText(AddScheduleActivity.this, "예산을 초과하였습니다.", Toast.LENGTH_SHORT).show();
-                        isPossible = true;
-                    }else{
-                        budget_Left = budget_Left - budget_schedule;
-                        textView_budgetLeft.setText("남은 금액"+budget_Left+"원");
-                        isPossible = false;
-                    }
-                    break;
+//                case R.id.budget_check:
+//                    if(editText_budget.equals("")){
+//                        budget_schedule = 0;
+//                    }else{
+//                        budget_schedule = Long.valueOf(editText_budget.getText().toString());
+//                    }
+//                    if(budget_Left<budget_schedule){
+//                        Toast.makeText(AddScheduleActivity.this, "예산을 초과하였습니다.", Toast.LENGTH_SHORT).show();
+//                        isPossible = true;
+//                    }else{
+//                        budget_Left = budget_Left - budget_schedule;
+//                        textView_budgetLeft.setText("남은 금액"+budget_Left+"원");
+//                        isPossible = false;
+//                    }
+//                    break;
             }
         }
     }
