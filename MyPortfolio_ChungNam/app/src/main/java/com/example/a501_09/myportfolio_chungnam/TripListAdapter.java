@@ -45,6 +45,7 @@ public class TripListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
+
         if(view == null){
             view = layoutInflater.inflate(item_layout_id,viewGroup,false);
         }
